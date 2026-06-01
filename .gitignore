@@ -1,0 +1,17 @@
+# ── macOS ──
+.DS_Store
+**/.DS_Store
+
+# ── Claude Code / local tooling & preview ──
+.claude/
+CLAUDE.md
+
+# ── Source materials (internal — not part of the published site) ──
+# Obsidian vault, CV source, case-study source notes, image assets, brief.
+# The published site uses copies under content/ and uploads/ instead.
+Documents/
+
+.obsidian/
+
+# ── CV (shared with recruiters directly, never published) ──
+uploads/
