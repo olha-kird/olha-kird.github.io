@@ -1,7 +1,7 @@
 ---
 title: "Self-Service Document and Questionnaire Builders"
 summary: Reducing customer onboarding time with self-service features to remove bottlenecks in the CS process.
-tags: [B2B, AI, Startup, Legal Tech, UI]
+tags: [B2B, Startup, Legal Tech, UI]
 year: 2025
 cover: images/legal-document-template.png
 gradient: 2

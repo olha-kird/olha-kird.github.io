@@ -1,7 +1,7 @@
 ---
 title: B2B Gas Station Maintenance
 summary: "Simplifying workflows and improving usability of a 20-year-old gas station maintenance system."
-tags: [B2B, SaaS, Operations, Research]
+tags: [B2B, SaaS, Operations, UX, Research]
 year: 2022
 gradient: 4
 cover: images/reports-cover.png
