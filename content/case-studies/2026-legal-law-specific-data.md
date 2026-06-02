@@ -3,7 +3,7 @@ title: "AI-Extracted Law-Specific Data"
 summary: Improving presentation of AI-extracted legal data to build user trust and increase AI features adoption.
 tags: [B2B, AI, Startup, Legal Tech, UI]
 year: 2026
-cover: images/legal-data-new.png
+cover: images/legal-data-cover.png
 gradient: 1
 testimonial: "Thanks for your work, Olha! And I looove giving feedback, let's do things like this more often!"
 testimonial_by: "Legal engineer, quote from the comment after completing the internal survey"
@@ -14,9 +14,9 @@ testimonial_by: "Legal engineer, quote from the comment after completing the int
 
 This is one of my most recent AI-related projects at the legal tech startup. The goal of the initiative was to make law-specific data more reliable for document generation. The document generator uses pre-made templates that are filled out with AI-extracted data from uploaded legal documents. Which means that output quality depends on data validation.
 
-![[legal-doc-generator.png]]
-
 The core design challenge was building enough trust in AI-extracted data that lawyers would actually review it — rather than skip it and generate inaccurate documents.
+
+![[legal-doc-generator.png]]
 
 ## Process
 ### Internal validation on a tight schedule

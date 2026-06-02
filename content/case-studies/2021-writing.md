@@ -7,7 +7,7 @@ gradient: 5
 cover: images/writing-dashboard.png
 sticky_goal: "Improve retention and reduce fragmentation between writing and playing"
 sticky_challenge: "Making the gamified system feel motivating without overpowering the actual writing"
-sticky_role: "Planning and conducting user research, interviews, user flows, UX prototyping"
+sticky_role: "Research, user interviews, user flow, UX design, prototyping"
 testimonial: "The results so far have been fantastic! We shared a preview of our work with our community and even drastic changes got ratings of 9/10 and higher."
 testimonial_by: "Founder, quote from the agency review"
 ---

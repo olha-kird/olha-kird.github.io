@@ -5,9 +5,6 @@ tags: [B2B, SaaS, Meteorology, MVP, UI]
 year: 2023
 gradient: 3
 cover: images/weather-cover.png
-sticky_goal: "Make the API offering accessible to customers without a dev team"
-sticky_challenge: "Making the product intuitive for non-technical users"
-sticky_role: "Discovery, UX design, prototyping, stakeholder communication"
 testimonial: "... helped my company tease out a solid design from our thoughts and ideas including our internal domain knowledge. The designers ... quickly grasped our goals and our target market. They \"got it\" very fast and were able to translate our knowledge and needs to a workable design with minimal back and forth."
 testimonial_by: "Chief Development Officer, quote from the agency review"
 ---

@@ -7,7 +7,7 @@ gradient: 4
 cover: images/reports-cover.png
 sticky_goal: "Improve usability and simplify workflows for different user types"
 sticky_challenge: "Designing for conservative power users with fully customizable workflows"
-sticky_role: "Research, user interviews, UX design and prototyping"
+sticky_role: "Research, user interviews, IA, user flow, UX design, prototyping"
 testimonial: "...extremely proficient in using Figma for the web components and ... able to integrate feedback in real-time updating the individual elements in our meetings and provided great insights into how we might improve the user experience while still including our feedback."
 testimonial_by: "Head of Product Innovation, quote from the agency review"
 ---
