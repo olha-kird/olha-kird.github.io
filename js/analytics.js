@@ -30,4 +30,26 @@
   if (localStorage.getItem("ph_internal")) {
     posthog.register({ internal: true });
   }
+
+  // --- Custom events ---------------------------------------------------------
+
+  // Case study viewed: fired on case-study.html, tagged with the slug from ?id=.
+  // Lets us chart which case studies get opened (autocapture only sees the URL).
+  var caseStudyId = new URLSearchParams(location.search).get("id");
+  if (location.pathname.indexOf("case-study.html") !== -1 && caseStudyId) {
+    posthog.capture("case_study_viewed", { slug: caseStudyId });
+  }
+
+  // Contact intent: clicks on the email or LinkedIn links. Delegated on document
+  // because the contact section is injected late via data-include in js/site.js.
+  document.addEventListener("click", function (e) {
+    var link = e.target.closest && e.target.closest("a[href]");
+    if (!link) return;
+    var href = link.getAttribute("href") || "";
+    if (href.indexOf("mailto:") === 0) {
+      posthog.capture("contact_click", { method: "email" });
+    } else if (href.indexOf("linkedin.com") !== -1) {
+      posthog.capture("contact_click", { method: "linkedin" });
+    }
+  });
 })();
