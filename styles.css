@@ -208,7 +208,7 @@ section { padding: 92px 0; }
 /* ===== Work ===== */
 .work-feature {
   display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 0;
-  border: 1px solid var(--line); border-radius: 6px; overflow: hidden;
+  border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
   background: var(--paper-card); position: relative;
   box-shadow: 0 1px 2px rgba(60,50,35,.05), 0 22px 46px -30px rgba(60,50,35,.3);
   text-decoration: none; color: inherit;
@@ -230,7 +230,7 @@ a.case-card:hover .case-link i, .case-link:hover i, .work-feature:hover .case-li
 .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 28px; }
 a.case-card {
   text-decoration: none; color: var(--ink); display: flex; flex-direction: column;
-  background: var(--paper-card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+  background: var(--paper-card); border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
   box-shadow: 0 1px 2px rgba(60,50,35,.05), 0 16px 34px -26px rgba(60,50,35,.28);
   transition: transform .2s ease, box-shadow .2s ease;
 }
@@ -249,25 +249,25 @@ a.case-card .cc-tags .chip { font-size: 12px; padding: 4px 10px; }
    with loops, to show the process isn't a straight 1-2-3 flow */
 .process-squiggle { position: absolute; left: 0; right: 0; top: -6px; bottom: -6px; z-index: 2; pointer-events: none; overflow: visible; }
 .process-squiggle path { fill: none; stroke: var(--accent); stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: 11 13; opacity: 0.8; }
-.process-track { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; position: relative; z-index: 1; }
+.process-track { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 24px; row-gap: 56px; position: relative; z-index: 1; }
 .step {
   position: relative;
-  background: var(--paper-card); border: 1px solid var(--line); border-radius: 10px;
+  background: var(--paper-card); border: 1px solid var(--line); border-radius: 4px;
   padding: 28px 28px 26px;
   box-shadow: 0 1px 2px rgba(60,50,35,.05), 0 16px 34px -26px rgba(60,50,35,.28);
 }
 .step .sn { font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 500; }
 .step-num {
   position: absolute; top: 36px; right: 28px;
-  font-family: var(--mono); font-size: 20px; font-weight: 500;
+  font-family: var(--mono); font-size: 20px; font-weight: 400;
   line-height: 1; color: var(--accent);
 }
 .step h4 { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; margin: 4px 0 16px; text-align: left; }
 .step-icon { font-size: 28px; color: var(--accent); margin-bottom: 6px; display: block; }
 .step p { font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); font-weight: 300; margin: 0 0 16px; }
-.step .step-list { list-style: none; margin: 0; padding: 0; counter-reset: step-counter; }
-.step .step-list li { font-size: 14.5px; line-height: 1.75; color: var(--ink-soft); font-weight: 300; display: flex; gap: 8px; counter-increment: step-counter; }
-.step .step-list li::before { content: counter(step-counter) "."; font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--accent); min-width: 16px; align-self: flex-start; line-height: 1.75; flex-shrink: 0; }
+.step .step-list { list-style: none; margin: 0; padding: 0; }
+.step .step-list li { font-size: 14.5px; line-height: 1.75; color: var(--ink-soft); font-weight: 300; display: flex; gap: 8px; }
+.step .step-list li::before { content: "\2192"; font-weight: 600; color: var(--accent); min-width: 16px; align-self: flex-start; line-height: 1.75; flex-shrink: 0; }
 .step .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line-soft); }
 .tag { font-size: 12.5px; font-weight: 500; padding: 5px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper-card); color: var(--ink-soft); white-space: nowrap; }
 
@@ -326,7 +326,7 @@ a.case-card .cc-tags .chip { font-size: 12px; padding: 4px 10px; }
 .cs-cover { position: relative; margin: 14px auto 0; }
 .cs-cover .ph { width: 100%; height: 540px; border-radius: 8px; box-shadow: 0 1px 2px rgba(60,50,35,.05), 0 30px 60px -40px rgba(60,50,35,.4); }
 /* a real cover image keeps its own proportions, centered (no cropping) */
-.cs-cover .ph.has-image { height: auto; }
+.cs-cover .ph.has-image { height: auto; border: 1px solid var(--line); }
 .cs-cover .ph.has-image img { height: auto; object-fit: contain; }
 .cs-cover .tape { width: 150px; }
 
@@ -427,7 +427,7 @@ a.case-card .cc-tags .chip { font-size: 12px; padding: 4px 10px; }
   section { padding: 76px 0; }
   .work-grid { grid-template-columns: 1fr; }
   .work-row-top { grid-template-columns: 1fr; }
-  .process-track { grid-template-columns: 1fr; }
+  .process-track { grid-template-columns: 1fr; row-gap: 24px; }
   .process-squiggle { display: none; }
   .hero .stats { flex-direction: column; align-items: center; }
   .contact-card { padding: 40px 28px; }
