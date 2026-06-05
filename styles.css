@@ -245,10 +245,6 @@ a.case-card .cc-tags .chip { font-size: 12px; padding: 4px 10px; }
 
 /* ===== Skills process ===== */
 .process { position: relative; }
-/* non-linear "squiggle" drawn ON TOP of the cards — a smooth hand-drawn line
-   with loops, to show the process isn't a straight 1-2-3 flow */
-.process-squiggle { position: absolute; left: 0; right: 0; top: -6px; bottom: -6px; z-index: 2; pointer-events: none; overflow: visible; }
-.process-squiggle path { fill: none; stroke: var(--accent); stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: 11 13; opacity: 0.8; }
 .process-track { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; position: relative; z-index: 1; }
 .step {
   position: relative;
@@ -428,7 +424,6 @@ a.case-card .cc-tags .chip { font-size: 12px; padding: 4px 10px; }
   .work-grid { grid-template-columns: 1fr; }
   .work-row-top { grid-template-columns: 1fr; }
   .process-track { grid-template-columns: 1fr; }
-  .process-squiggle { display: none; }
   .hero .stats { flex-direction: column; align-items: center; }
   .contact-card { padding: 40px 28px; }
 }
