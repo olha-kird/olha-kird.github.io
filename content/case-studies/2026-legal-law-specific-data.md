@@ -21,18 +21,18 @@ The core design challenge was building enough trust in AI-extracted data that la
 ## Process
 ### Internal validation on a tight schedule
 
-The initiative involved a lot of stakeholder alignment and product validation. I analyzed insights from the user interviews run by the product manager, and the main user feedback was that law-specific data was not structured meaningfully and difficult to understand. As a result, users were not reviewing it, generating document right away, and therefore often getting inaccurate results. Below is the previous design of the page.
+The initiative involved a lot of stakeholder alignment and product validation. I analyzed insights from the user interviews run by the product manager, and the main user feedback was that law-specific data was not structured meaningfully and difficult to understand. As a result, users were not reviewing the data, and therefore getting inaccurate results from document generation. Below is the previous design of the page.
 
 ![[legal-data-before.png]]
 
-When iterating on the design, I realized that I need additional input for decision-making. Since user research with lawyers requires a lot of time for preparation and we had a tight schedule, I decided to run an internal unmoderated usability testing and ask some UI questions in a survey. The first results revealed significant confusion, so I continued iterating until the layout addressed the main issues and was validated with the team.
+When iterating on the design, I realized that I need additional input for decision-making. Since user research with lawyers requires a lot of time for preparation, I decided to run an internal unmoderated usability testing and ask some UI questions in a survey. The first results revealed significant confusion, so I continued iterating on the layout to address the main issues.
 
 ## Solution
 ### Structure that builds trust
 The redesign focused on three topics that were blocking user trust:
 - All law-specific data fields are grouped by the law field and law area for better context.
 - Some fields have additional features, such as relations to other entities and historical values.
-- AI reasoning is hidden behind the KI badge to make the layout cleaner. Users can still preview the source to validate the data.
+- Users can check AI reasoning and preview the source to validate the data.
 
 ![[legal-data-after.png]]
 

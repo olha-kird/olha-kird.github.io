@@ -31,6 +31,19 @@
     posthog.register({ internal: true });
   }
 
+  // Tidy the address bar: strip tracking params after PostHog has captured them
+  // (init() above already sent the pageview with UTMs), so visitors can copy a
+  // clean URL. Only removes known tracking keys — functional params like ?id= stay.
+  (function cleanUrl() {
+    var url = new URL(location.href);
+    var dirty = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "ph_internal"];
+    var changed = false;
+    dirty.forEach(function (p) {
+      if (url.searchParams.has(p)) { url.searchParams.delete(p); changed = true; }
+    });
+    if (changed) history.replaceState({}, "", url.pathname + url.search + url.hash);
+  })();
+
   // --- Custom events ---------------------------------------------------------
 
   // Case study viewed: fired on case-study.html, tagged with the slug from ?id=.
