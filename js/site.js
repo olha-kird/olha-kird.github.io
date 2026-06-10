@@ -24,16 +24,78 @@ function parseFrontmatter(raw) {
   return { meta, body: (match[2] || "").trim() };
 }
 
+/* Bare names resolve to the images/ folder; paths with a slash are used as-is. */
+function resolveEmbedSrc(name) {
+  return name.includes("/") ? name : `images/${name}`;
+}
+
 /* Obsidian-style ![[file.png]] -> real <img>, with the striped paper
    placeholder shown only when the file is missing (handled by
    hookEmbedFallbacks after the markup is inserted).
-   Bare names resolve to the images/ folder; paths with a slash are used as-is. */
+
+   Before/after redesign slider — opt in per image with the `compare:` prefix:
+     ![[compare: before.png | after.png]]
+   Renders a draggable vertical divider: `before` shows left of the line,
+   `after` to the right. Both images should share the same dimensions. */
 function replaceObsidianEmbeds(md) {
   return md.replace(/!\[\[([^\]]+)\]\]/g, (_, raw) => {
-    const name = String(raw).trim();
-    const src = name.includes("/") ? name : `images/${name}`;
-    const label = name.replace(/^.*\//, "").replace(/\.[a-z0-9]+$/i, "").trim();
+    const inner = String(raw).trim();
+
+    const cmp = inner.match(/^compare\s*:\s*(.+)$/i);
+    if (cmp) {
+      const parts = cmp[1].split("|").map((s) => s.trim()).filter(Boolean);
+      if (parts.length === 2) {
+        const [before, after] = parts;
+        return `\n<div class="md-compare" style="--pos:50%">` +
+          `<img class="cmp-img cmp-after" src="${escapeHtml(resolveEmbedSrc(after))}" alt="After redesign" draggable="false" />` +
+          `<div class="cmp-before-wrap"><img class="cmp-img cmp-before" src="${escapeHtml(resolveEmbedSrc(before))}" alt="Before redesign" draggable="false" /></div>` +
+          `<div class="cmp-handle" role="slider" tabindex="0" aria-label="Drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">` +
+          `<span class="cmp-line"></span>` +
+          `<span class="cmp-grip"><i class="ti ti-arrows-move-horizontal"></i></span>` +
+          `</div></div>\n`;
+      }
+    }
+
+    const src = resolveEmbedSrc(inner);
+    const label = inner.replace(/^.*\//, "").replace(/\.[a-z0-9]+$/i, "").trim();
     return `\n<img class="md-embed" src="${escapeHtml(src)}" alt="${escapeHtml(label)}" data-label="${escapeHtml(label)}" />\n`;
+  });
+}
+
+/* Wire up drag/keyboard interaction for each before/after slider. */
+function initCompare(root = document) {
+  root.querySelectorAll(".md-compare").forEach((el) => {
+    const handle = el.querySelector(".cmp-handle");
+    let dragging = false;
+
+    const setPct = (pct) => {
+      pct = Math.max(0, Math.min(100, pct));
+      el.style.setProperty("--pos", pct + "%");
+      handle.setAttribute("aria-valuenow", Math.round(pct));
+    };
+    const setFromX = (clientX) => {
+      const rect = el.getBoundingClientRect();
+      setPct(((clientX - rect.left) / rect.width) * 100);
+    };
+
+    el.addEventListener("pointerdown", (e) => {
+      dragging = true;
+      el.classList.add("is-dragging");
+      el.setPointerCapture?.(e.pointerId);
+      setFromX(e.clientX);
+    });
+    el.addEventListener("pointermove", (e) => { if (dragging) setFromX(e.clientX); });
+    const stop = () => { dragging = false; el.classList.remove("is-dragging"); };
+    el.addEventListener("pointerup", stop);
+    el.addEventListener("pointercancel", stop);
+
+    handle.addEventListener("keydown", (e) => {
+      const cur = parseFloat(el.style.getPropertyValue("--pos")) || 50;
+      if (e.key === "ArrowLeft") { e.preventDefault(); setPct(cur - 2); }
+      else if (e.key === "ArrowRight") { e.preventDefault(); setPct(cur + 2); }
+      else if (e.key === "Home") { e.preventDefault(); setPct(0); }
+      else if (e.key === "End") { e.preventDefault(); setPct(100); }
+    });
   });
 }
 
@@ -241,6 +303,7 @@ async function renderCaseStudy(rootEl) {
     </div>`;
 
   hookEmbedFallbacks(rootEl);
+  initCompare(rootEl);
 }
 
 function notFoundMarkup(message) {

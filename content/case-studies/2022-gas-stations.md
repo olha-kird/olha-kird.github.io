@@ -1,10 +1,10 @@
 ---
 title: B2B Gas Station Maintenance
-summary: "Simplifying workflows and improving usability of a 20-year-old gas station maintenance system."
-tags: [B2B, SaaS, Operations, UX, Research]
+summary: "Simplifying workflows and improving usability of a 20-year-old gas station maintenance system with 5 000+ automated stations."
+tags: [B2B, SaaS, Operations, UX, Research, Redesign]
 year: 2022
 gradient: 4
-cover: images/reports-cover.png
+cover: images/reports-kanban-ui-cover.png
 sticky_goal: "Improve usability and simplify workflows for different user types"
 sticky_challenge: "Designing for conservative power users with fully customizable workflows"
 sticky_role: "Research, user interviews, IA, user flow, UX design, prototyping"
@@ -35,11 +35,11 @@ The next step was to conduct user interviews and understand the relevant workflo
 
 While analyzing the information architecture, I realized it contained a very similar entity to a support ticket. This gave me the idea to reuse a pattern from task management systems and introduce a Kanban board. This layout would improve usability for users who process lots of tickets and update their statuses.
 
-![[reports-kanban.png]]
+![[compare: reports-kanban.png | reports-kanban-ui.png]]
 
 Although the client liked the Kanban view at first, it was eventually rejected. The reason was that all statuses were fully customizable, and every customer would have a different set depending on their workflow. And most importantly, not all workflows were linear, so it didn’t make sense to visualize them this way. As a result, we decided to stick with the table view.
 
-![[reports-table.png]]
+![[compare: reports-table.png | reports-table-ui.png]]
 
 Even though we decided to keep the original layout, I introduced some UX changes to improve usability:
 

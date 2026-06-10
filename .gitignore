@@ -5,6 +5,8 @@
 # ── Claude Code / local tooling & preview ──
 .claude/
 CLAUDE.md
+serve-local.py
+.vscode/
 
 # ── Source materials (internal — not part of the published site) ──
 # Obsidian vault, CV source, case-study source notes, image assets, brief.
