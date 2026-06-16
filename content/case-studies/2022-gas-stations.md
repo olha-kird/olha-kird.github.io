@@ -5,9 +5,6 @@ tags: [B2B, SaaS, Enterprise, UX, UI, Research, Redesign]
 year: "2022 → 2026 redesign"
 gradient: 4
 cover: images/reports-kanban-ui-cover.png
-sticky_goal: "Improve usability and simplify workflows for different user types"
-sticky_challenge: "Designing for conservative power users with fully customizable workflows"
-sticky_role: "Research, user interviews, IA, user flow, UX design, prototyping"
 testimonial: "...extremely proficient in using Figma for the web components and ... able to integrate feedback in real-time updating the individual elements in our meetings and provided great insights into how we might improve the user experience while still including our feedback."
 testimonial_by: "Head of Product Innovation, quote from the agency review"
 ---
@@ -15,7 +12,7 @@ testimonial_by: "Head of Product Innovation, quote from the agency review"
 ## Context
 ### Maintenance of equipment and the UI
 
-This project was a redesign of a B2B ticket management system used primarily by gas stations to keep track of their equipment. The previous design was outdated and hard to navigate, so my goal was to reduce complexity.
+This project was a redesign of a 20-year-old B2B report management system used primarily by gas stations to keep track of their equipment and perform required maintenance. The previous design was outdated and hard to navigate, so my goal was to reduce complexity and support the customizable workflows of different user types across 5 000+ stations.
 
 ## Process
 ### Meeting the different types of users

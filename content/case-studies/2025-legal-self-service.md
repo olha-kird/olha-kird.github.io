@@ -1,13 +1,10 @@
 ---
 title: "Self-Service Document and Questionnaire Builders"
 summary: Reducing customer onboarding time with self-service features to remove bottlenecks in the CS process.
-tags: [B2B, Startup, Legal Tech, UI]
+tags: [B2B, AI, Startup, Legal Tech, UI]
 year: 2025
 cover: images/legal-document-template.png
 gradient: 2
-sticky_goal: "Save time and remove the bottleneck on the CS team"
-sticky_challenge: "Large scope and technical constraints from the previous implementation"
-sticky_role: "End-to-end design: discovery, UI design, and dev handoff"
 testimonial: "Olha showed great ability to quickly understand the customer's processes and presented them in an easy to understand and extendable way. Because I'm a huge fan of iteration I value that a lot."
 testimonial_by: "Product Manager, quote from the message after the design presentation"
 ---
@@ -41,6 +38,7 @@ The solution consists of three tools that support the same goal. Users can now c
 
 The questionnaires were the most challenging part of the design. The previous version on the admin side was initially implemented before any designers joined the team, so it had all sections and questions listed in a long scrollable page with no additional navigation. The new version introduces an overview in the sidebar, and allows users to connect fields to each question to make sure that all data is saved correctly in the system. Users can also generate questionnaires with AI to have a starting point to build upon.
 
+![[legal-questionnaire-generate.png]]
 ![[legal-questionnaire.png]]
 
 ### Document templates

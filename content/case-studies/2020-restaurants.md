@@ -1,6 +1,6 @@
 ---
 title: "B2B Restaurant Management SaaS"
-summary: "Co-founding a tablet-friendly SaaS for waiters to manage table bookings. Startup acquired by monobank in 2023."
+summary: "Co-founding a restaurant table management SaaS startup — later acquired by monobank in 2023."
 tags: [B2B, Startup, Hospitality, UI]
 year: 2020
 gradient: 1
@@ -11,7 +11,7 @@ testimonial_by: "Co-founder of monobank, quote from the post about the startup a
 
 ## Context
 ### Pivot from B2C to B2B
-One day, a university friend approached me with a suggestion to help him design a mobile application for customers to book tables in restaurants. Soon, with a small team of friends, we  designed and developed a beautiful iOS application where users could search for restaurants and select a specific table to book... But no restaurant wanted to be on the platform.
+One day, a university friend approached me with a suggestion to help him design a mobile application for customers to book tables in restaurants. Soon, with a small team of friends, we designed and developed a beautiful iOS application where users could search for restaurants and select a specific table to book... But no restaurant wanted to be on the platform.
 
 ![[restaurants-mobile.png]]
 
@@ -34,7 +34,7 @@ The main challenge was designing for the fast-paced restaurant environment — w
 ![[restaurants-timeline.png]]
 ![[restaurants-booking.png]]
 
-Since we started the project in 2020, a significant challange was the lockdown. It was not easy to test the solution we offered but we still managed to perform some live usability testing and see the product in action.
+Since we started the project in 2020, a significant challenge was the lockdown. It was not easy to test the solution we offered but we still managed to perform some live usability testing and see the product in action.
 
 ## Outcome
 ### Acquisition

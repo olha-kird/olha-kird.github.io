@@ -1,6 +1,6 @@
 ---
 title: B2B Weather Monitoring Timeline
-summary: Building a new product MVP for a B2B weather intelligence company with a 50K customer base.
+summary: "Building a new product MVP for the existing API of a weather intelligence company with a 50K customer base."
 tags: [B2B, SaaS, Meteorology, UX, UI, MVP]
 year: "2023 → 2026 redesign"
 gradient: 3
@@ -15,7 +15,7 @@ The client came to our agency with a request to create a B2B weather monitoring 
 
 ## Process
 ### Top-down, from architecture to interactions
-After gathering the initial requirements, I defined the information architecture and built a user flow that helped me prioritize features and lay foundation for the wireframes. Users can set up alerts to get notified about extreme weather at selected locations. I used a top-down approach for the alert setup. This means that users can create all necessary data objects during the workflow without interruptions.
+After gathering the initial requirements, I defined the information architecture and built a user flow that helped me prioritize features and lay a foundation for the wireframes. Users can set up alerts to get notified about extreme weather at selected locations. I used a top-down approach for the alert setup. This means that users can create all necessary data objects during the workflow without interruptions.
 
 ![[weather-flow.png]]
 

@@ -25,7 +25,7 @@ The initiative involved a lot of stakeholder alignment and product validation. I
 
 ![[legal-data-before.png]]
 
-When iterating on the design, I realized that I need additional input for decision-making. Since user research with lawyers requires a lot of time for preparation, I decided to run an internal unmoderated usability testing and ask some UI questions in a survey. The first results revealed significant confusion, so I continued iterating on the layout to address the main issues.
+When iterating on the design, I realized that I needed additional input for decision-making. Since user research with lawyers requires a lot of time for preparation, I decided to run an internal unmoderated usability testing and ask some UI questions in a survey. The first results revealed significant confusion, so I continued iterating on the layout to address the main issues.
 
 ## Solution
 ### Structure that builds trust

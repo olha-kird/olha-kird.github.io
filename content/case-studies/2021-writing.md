@@ -1,13 +1,10 @@
 ---
 title: "B2C Writing Gamification Platform"
-summary: "Research-based redesign of a B2C productivity tool tool for writers, received 9/10 feedback from the community."
+summary: "Research-based redesign of a B2C productivity tool for writers, received 9/10 feedback from the community."
 tags: [B2C, Productivity, UX, Research]
 year: 2021
 gradient: 5
 cover: images/writing-dashboard.png
-sticky_goal: "Improve retention and reduce fragmentation between writing and playing"
-sticky_challenge: "Making the gamified system feel motivating without overpowering the actual writing"
-sticky_role: "Research, user interviews, user flow, UX design, prototyping"
 testimonial: "The results so far have been fantastic! We shared a preview of our work with our community and even drastic changes got ratings of 9/10 and higher."
 testimonial_by: "Founder, quote from the agency review"
 ---
@@ -15,7 +12,7 @@ testimonial_by: "Founder, quote from the agency review"
 ## Context
 ### Fighting monsters and the writer's block
 
-This project was a redesign of a web-based writing game that helps users find motivation to write daily. The client had a team of great storytellers and illustrators, but they needed external help to improve the usability of their platform. They have a large community, so the project was designed in close collaboration with users.
+This project was a redesign of a web-based writing game that helps users find motivation to write daily. The client had a team of great storytellers and illustrators, but they needed external help to improve the usability of their platform. The platform had a large community, so the project was designed in close collaboration with users.
 
 ## Process
 ### Community-backed research
