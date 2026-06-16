@@ -1,7 +1,7 @@
 ---
 title: "B2C Writing Gamification Platform"
 summary: "Research-based redesign of a B2C productivity tool tool for writers, received 9/10 feedback from the community."
-tags: [B2C, Productivity, Gamification, UX, Research]
+tags: [B2C, Productivity, UX, Research]
 year: 2021
 gradient: 5
 cover: images/writing-dashboard.png

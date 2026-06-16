@@ -1,8 +1,8 @@
 ---
 title: B2B Weather Monitoring Timeline
 summary: Building a new product MVP for a B2B weather intelligence company with a 50K customer base.
-tags: [B2B, SaaS, Meteorology, MVP, UI]
-year: 2023
+tags: [B2B, SaaS, Meteorology, UX, UI, MVP]
+year: "2023 → 2026 redesign"
 gradient: 3
 cover: images/weather-cover.png
 testimonial: "... helped my company tease out a solid design from our thoughts and ideas including our internal domain knowledge. The designers ... quickly grasped our goals and our target market. They \"got it\" very fast and were able to translate our knowledge and needs to a workable design with minimal back and forth."

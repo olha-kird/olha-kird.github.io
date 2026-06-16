@@ -1,8 +1,8 @@
 ---
 title: B2B Gas Station Maintenance
 summary: "Simplifying workflows and improving usability of a 20-year-old gas station maintenance system with 5 000+ automated stations."
-tags: [B2B, SaaS, Operations, UX, Research, Redesign]
-year: 2022
+tags: [B2B, SaaS, Enterprise, UX, UI, Research, Redesign]
+year: "2022 → 2026 redesign"
 gradient: 4
 cover: images/reports-kanban-ui-cover.png
 sticky_goal: "Improve usability and simplify workflows for different user types"

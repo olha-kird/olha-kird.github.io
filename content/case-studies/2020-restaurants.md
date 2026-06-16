@@ -1,6 +1,6 @@
 ---
 title: "B2B Restaurant Management SaaS"
-summary: "Co-founding interactive tablet-friendly software for waiters to manage table bookings, later acquired by monobank in 2023."
+summary: "Co-founding a tablet-friendly SaaS for waiters to manage table bookings. Startup acquired by monobank in 2023."
 tags: [B2B, Startup, Hospitality, UI]
 year: 2020
 gradient: 1

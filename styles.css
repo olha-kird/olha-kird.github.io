@@ -227,7 +227,7 @@ section { padding: 92px 0; }
 a.case-card:hover .case-link i, .case-link:hover i, .work-feature:hover .case-link i { transform: translate(3px,-3px); }
 
 .work-row-top { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
-.work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 28px; }
+.work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 28px; }
 a.case-card {
   text-decoration: none; color: var(--ink); display: flex; flex-direction: column;
   background: var(--paper-card); border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
