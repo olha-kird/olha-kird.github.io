@@ -117,6 +117,18 @@ function renderMarkdown(body) {
   return marked.parse(replaceObsidianEmbeds(body));
 }
 
+/* Stable heading IDs: `## Title {#my-id}` → <h2 id="my-id">Title</h2>.
+   Lets analytics track a section by a fixed id even if its visible text is reworded.
+   Optional per heading; unmarked headings are unaffected. */
+function applyHeadingIds(root) {
+  root.querySelectorAll(".cs-prose h2, .cs-prose h3").forEach((h) => {
+    const m = h.textContent.match(/\s*\{#([a-z0-9-]+)\}\s*$/i);
+    if (!m) return;
+    h.id = m[1];
+    h.textContent = h.textContent.slice(0, m.index).replace(/\s+$/, "");
+  });
+}
+
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, (c) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
@@ -304,6 +316,10 @@ async function renderCaseStudy(rootEl) {
 
   hookEmbedFallbacks(rootEl);
   initCompare(rootEl);
+  applyHeadingIds(rootEl);
+
+  // Signal that the case study DOM is ready (js/analytics.js listens to track engagement).
+  document.dispatchEvent(new CustomEvent("casestudy:rendered", { detail: { slug } }));
 }
 
 function notFoundMarkup(message) {
