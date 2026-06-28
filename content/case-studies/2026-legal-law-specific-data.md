@@ -1,7 +1,7 @@
 ---
 title: "AI-Extracted Law-Specific Data"
 summary: Improving presentation of AI-extracted legal data to build user trust and increase AI features adoption.
-tags: [B2B, AI, Startup, Legal Tech, UI]
+tags: [Legal tech, AI, Startup]
 year: 2026
 cover: images/legal-data-cover.png
 gradient: 1

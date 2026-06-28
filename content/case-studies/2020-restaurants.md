@@ -1,7 +1,7 @@
 ---
 title: "B2B Restaurant Management SaaS"
 summary: "Co-founding a restaurant table management SaaS startup — later acquired by monobank in 2023."
-tags: [B2B, Startup, Hospitality, UI]
+tags: [0 → 1, Startup, Acquisition]
 year: 2020
 gradient: 1
 cover: images/restaurants-timeline.png
