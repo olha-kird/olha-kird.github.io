@@ -5,8 +5,8 @@ tags: [0 → 1, Startup, Acquisition]
 year: 2020
 gradient: 1
 cover: images/restaurants-timeline.png
-testimonial: "We are inspired by young teams capable of independently creating and developing a unique product ... Now, guests will also get convenient table booking, and restaurants — even more useful analytics."
-testimonial_by: "Co-founder of monobank, quote from the post about the startup acquisition"
+testimonial: "We are inspired by young teams capable of independently creating and developing a unique product. Now, guests will also get convenient table booking, and restaurants — even more useful analytics."
+testimonial_by: "Co-founder of monobank, quote from the startup acquisition announcement"
 ---
 
 ## Context

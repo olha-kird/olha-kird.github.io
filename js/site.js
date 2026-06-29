@@ -144,7 +144,7 @@ async function fetchStudy(slug) {
 /* A cover area: real <img> if frontmatter has `cover`, else striped placeholder. */
 function coverMarkup(meta, extraClass, label) {
   if (meta.cover) {
-    return `<div class="ph ${extraClass} has-image"><img src="${escapeHtml(meta.cover)}" alt="${escapeHtml(meta.title || "")}" /></div>`;
+    return `<div class="ph ${extraClass} has-image"><img src="${escapeHtml(meta.cover)}" alt="${escapeHtml(meta.title || "")}" decoding="async" /></div>`;
   }
   return `<div class="ph ${extraClass}"><span>${escapeHtml(label || "cover coming soon")}</span></div>`;
 }
@@ -153,14 +153,26 @@ function coverMarkup(meta, extraClass, label) {
 const revealIO = new IntersectionObserver(
   (entries) => {
     entries.forEach((e) => {
-      if (e.isIntersecting) { e.target.classList.add("in"); revealIO.unobserve(e.target); }
+      if (e.isIntersecting) {
+        e.target.classList.add("in");
+        // Drop the compositor hint only once the fade finishes — clearing it
+        // mid-transition forces a re-raster (visible on the image-heavy cards).
+        e.target.addEventListener("transitionend", () => { e.target.style.willChange = "auto"; }, { once: true });
+        revealIO.unobserve(e.target);
+      }
     });
   },
   { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
 );
 function observeReveals(root = document) {
-  root.querySelectorAll(".reveal:not(.in)").forEach((el, i) => {
-    el.style.transitionDelay = (Math.min(i % 3, 2) * 70) + "ms";
+  root.querySelectorAll(".reveal:not(.in)").forEach((el) => {
+    // Stagger by the element's position among its reveal-siblings in the same
+    // container, so each group (a grid row, the process cards, a header block)
+    // cascades in DOM order — independent of how many reveals precede it on the
+    // page. Capped so long lists don't drag.
+    const sibs = [...el.parentElement.children].filter((c) => c.classList.contains("reveal"));
+    const idx = Math.max(0, sibs.indexOf(el));
+    el.style.transitionDelay = Math.min(idx, 3) * 80 + "ms";
     revealIO.observe(el);
   });
 }
@@ -295,7 +307,7 @@ async function renderCaseStudy(rootEl) {
   rootEl.innerHTML = `
     <section class="cs-hero">
       <div class="wrap">
-        <a class="back-link" href="index.html#work"><i class="ti ti-arrow-left"></i> All work</a>
+        <a class="back-link" href="index.html#cases"><i class="ti ti-arrow-left"></i> All work</a>
         <div class="case-tags">${tags}</div>
         <h1>${escapeHtml(meta.title || slug)}</h1>
         ${meta.summary ? `<p class="lead">${escapeHtml(meta.summary)}</p>` : ""}
@@ -326,10 +338,10 @@ function notFoundMarkup(message) {
   return `
     <section class="cs-hero">
       <div class="wrap">
-        <a class="back-link" href="index.html#work"><i class="ti ti-arrow-left"></i> All work</a>
+        <a class="back-link" href="index.html#cases"><i class="ti ti-arrow-left"></i> All work</a>
         <h1>Case study not found</h1>
         <p class="lead">${escapeHtml(message)}</p>
-        <p style="margin-top:28px"><a class="btn btn-primary" href="index.html#work"><i class="ti ti-arrow-left"></i> Back to all work</a></p>
+        <p style="margin-top:28px"><a class="btn btn-primary" href="index.html#cases"><i class="ti ti-arrow-left"></i> Back to all work</a></p>
       </div>
     </section>`;
 }
@@ -402,7 +414,7 @@ function initChrome() {
       const id = a.getAttribute("href");
       if (id.length > 1) {
         const t = document.querySelector(id);
-        if (t) { ev.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 70, behavior: "smooth" }); }
+        if (t) { ev.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 32, behavior: "smooth" }); }
       }
     });
   });

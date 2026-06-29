@@ -6,7 +6,7 @@ year: 2025
 cover: images/legal-document-template.png
 gradient: 2
 testimonial: "Olha showed great ability to quickly understand the customer's processes and presented them in an easy to understand and extendable way. Because I'm a huge fan of iteration I value that a lot."
-testimonial_by: "Product Manager, quote from the message after the design presentation"
+testimonial_by: "Product Manager, feedback after design presentation"
 ---
 
 ## Context
