@@ -258,7 +258,7 @@ async function renderCaseStudy(rootEl) {
   document.title = `${meta.title || "Case study"} — Olha Kirdiaieva`;
 
   const tags = (meta.tags || [])
-    .map((t) => `<span class="chip" style="font-size:12.5px;padding:5px 11px">${escapeHtml(t)}</span>`)
+    .map((t) => `<span class="chip" style="font-size:12px;padding:5px 11px">${escapeHtml(t)}</span>`)
     .join("");
 
   const hasBody = body && body.trim().length > 0;
