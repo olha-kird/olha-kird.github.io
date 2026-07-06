@@ -4,6 +4,9 @@
    (adapted from the Claude Design deliverable: paper.css + home.css + case.css)
    ===================================================================== */
 
+/* TEMP PREVIEW — Roboto Condensed from Google Fonts CDN (remove before deploy) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500&display=swap');
+
 /* ===== Self-hosted fonts (no third-party requests — GDPR-friendly) =====
    Geologica + Geist Mono variable woff2, latin + latin-ext subsets,
    pulled from Google Fonts and served locally from assets/fonts/. */
@@ -57,7 +60,7 @@
   --tape:        rgba(216,206,188,0.5);
   --dot:         #d6cfc4;
   --font: "Geologica", system-ui, sans-serif;
-  --mono: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+  --mono: "Roboto Condensed", "Geist Mono", ui-monospace, monospace;
 
   /* ── Type scale ── */
   --text-xs:   12px;   /* micro mono labels, tags */
@@ -231,8 +234,8 @@ body {
 /* ===== Section scaffolding ===== */
 section { padding: 92px 0; }
 .sec-label { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
-.sec-label .n { font-family: var(--mono); font-size: var(--text-sm); color: var(--accent); font-weight: 500; }
-.sec-label .t { font-family: var(--mono); font-size: var(--text-sm); font-weight: 500; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--muted); }
+.sec-label .n { font-family: var(--mono); font-size: var(--text-md); color: var(--accent); font-weight: 400; }
+.sec-label .t { font-family: var(--mono); font-size: var(--text-md); font-weight: 400; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--muted); }
 .sec-label .rule { flex: 1; height: 1px; background: var(--line); }
 .sec-title { font-size: var(--text-5xl); line-height: 1.05; letter-spacing: var(--track-display); font-weight: 600; margin: 0 0 14px; max-width: 760px; }
 .sec-intro { font-size: var(--text-lg); line-height: var(--lh-body); color: var(--ink-soft); font-weight: 300; max-width: none; margin: 0; }
@@ -352,7 +355,7 @@ a.case-card .cc-tags .chip { font-size: var(--text-xs); padding: 4px 10px; }
 /* ===== Site footer ===== */
 .site-footer { padding: 28px 0; }
 .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; }
-.footer-copy { font-family: var(--mono); font-size: var(--text-sm); letter-spacing: var(--track-quiet); color: var(--muted); text-decoration: none; }
+.footer-copy { font-family: var(--mono); font-size: var(--text-md); letter-spacing: var(--track-quiet); color: var(--muted); text-decoration: none; }
 a.footer-link { text-underline-offset: 3px; }
 a.footer-link:hover { color: var(--accent); text-decoration: underline; }
 
@@ -360,7 +363,7 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
 .legal { max-width: 760px; margin: 0 auto; padding: 52px 0 24px; }
 .legal-head { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin-bottom: 28px; }
 .legal h1 { font-size: clamp(30px, 4vw, 44px); line-height: 1.06; letter-spacing: var(--track-display); font-weight: 600; margin: 0 0 6px; }
-.legal .updated { font-family: var(--mono); font-size: var(--text-sm); letter-spacing: var(--track-quiet); color: var(--muted); }
+.legal .updated { font-family: var(--mono); font-size: var(--text-md); letter-spacing: var(--track-quiet); color: var(--muted); }
 .lang-switch { display: inline-flex; gap: 4px; border: 1px solid var(--line); border-radius: 999px; padding: 4px; background: var(--paper-card); flex: 0 0 auto; }
 .lang-switch button { font-family: var(--font); font-weight: 600; font-size: var(--text-xs); letter-spacing: var(--track-label-sm); text-transform: uppercase; border: none; background: none; color: var(--ink-soft); padding: 6px 14px; border-radius: 999px; cursor: pointer; transition: background .15s ease, color .15s ease; }
 .lang-switch button.active { background: var(--control-active); color: var(--paper-card); }
