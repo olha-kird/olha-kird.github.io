@@ -8,11 +8,8 @@
 <meta name="referrer" content="no-referrer" />
 <title>Case Study — Olha Kirdiaieva</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" />
+<!-- Fonts (Geologica, Geist Mono) are self-hosted via @font-face in styles.css. -->
+<link rel="stylesheet" href="assets/tabler/tabler-icons.min.css" />
 <link rel="stylesheet" href="styles.css" />
 <script src="js/analytics.js"></script>
 </head>
@@ -30,8 +27,11 @@
   <div data-include="partials/contact.html"></div>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<!-- ============ FOOTER (shared component) ============ -->
+<div data-include="partials/footer.html"></div>
+
+<script src="js/vendor/marked.min.js"></script>
+<script src="js/vendor/js-yaml.min.js"></script>
 <script src="js/site.js"></script>
 </body>
 </html>

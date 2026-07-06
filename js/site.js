@@ -350,7 +350,10 @@ function notFoundMarkup(message) {
    <div data-include="partials/header.html"></div> is replaced by the file's
    contents. On the home page, index.html#… links are rewritten to #… so
    in-page smooth-scroll keeps working. */
-const ON_HOME = !/case-study\.html$/.test(window.location.pathname);
+// Home = the site root or index.html. Other standalone pages (case study, legal
+// pages) keep their full "index.html#…" links so those navigate back to the home
+// page instead of being rewritten to same-page anchors that don't exist there.
+const ON_HOME = /(^|\/)(index\.html)?$/.test(window.location.pathname);
 
 async function applyIncludes() {
   const slots = [...document.querySelectorAll("[data-include]")];

@@ -22,6 +22,7 @@
     person_profiles: "identified_only", // anonymous visitors don't create person profiles → cheaper, more privacy-friendly
     persistence: "memory", // cookie-less: nothing stored on the visitor's device → no consent banner needed
     disable_session_recording: true, // session replay needs storage/consent; off to stay cookie-less
+    respect_dnt: true, // honour "Do Not Track" / GPC → a persistent, storage-free opt-out (documented in the privacy policy)
   });
 
   // Exclude your own visits: tag events as internal if this browser is flagged.
