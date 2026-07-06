@@ -61,7 +61,9 @@
     var href = link.getAttribute("href") || "";
     if (href.indexOf("mailto:") === 0) {
       posthog.capture("contact_click", { method: "email" });
-    } else if (href.indexOf("linkedin.com") !== -1) {
+    } else if (href.indexOf("linkedin.com/in/") !== -1) {
+      // Only the profile link counts as contact intent — not any linkedin.com URL
+      // (e.g. an article linked from a case study would otherwise be miscounted).
       posthog.capture("contact_click", { method: "linkedin" });
     }
   });
@@ -106,10 +108,20 @@
       });
     }
 
+    // Measure completion against the case-study content, not the whole document:
+    // the contact footer is a sibling injected late via data-include, so counting
+    // it would mark a reader who finished the article as short of the end.
+    // Recomputed each scroll so late layout shifts (images, the footer) self-correct.
+    var contentEl = document.getElementById("case-study-root");
+    function contentBottom() {
+      if (contentEl) return contentEl.getBoundingClientRect().bottom + window.pageYOffset;
+      return document.documentElement.scrollHeight;
+    }
+
     var maxScrollPct = 0;
     function updateScroll() {
-      var docH = document.documentElement.scrollHeight;
-      var pct = docH > 0 ? ((window.pageYOffset + window.innerHeight) / docH) * 100 : 0;
+      var h = contentBottom();
+      var pct = h > 0 ? ((window.pageYOffset + window.innerHeight) / h) * 100 : 0;
       if (pct > maxScrollPct) maxScrollPct = Math.min(100, pct);
     }
     var rafPending = false;
