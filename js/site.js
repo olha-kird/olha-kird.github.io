@@ -423,6 +423,42 @@ function initChrome() {
   });
 }
 
+/* Arriving at e.g. index.html#contact from another page: the browser's native
+   hash jump fired before applyIncludes() injected the contact section, so it
+   landed at the top. Now that the partials exist, jump to the target (with the
+   same sticky-header offset the in-page anchor clicks use). */
+function scrollToInitialHash() {
+  const id = window.location.hash.slice(1);
+  if (!id) return;
+  const t = document.getElementById(id);
+  if (!t) return;
+
+  // The target keeps moving as the page settles after the first jump: async
+  // partials, web-font swap and image decode all reflow the content above it.
+  // Re-align on a short loop until the position holds steady (or we hit the
+  // time cap), and bail the moment the visitor scrolls so we never fight them.
+  let interrupted = false;
+  const stop = () => { interrupted = true; };
+  window.addEventListener("wheel", stop, { passive: true, once: true });
+  window.addEventListener("touchmove", stop, { passive: true, once: true });
+
+  const jump = () => {
+    if (interrupted) return;
+    window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 32, behavior: "auto" });
+  };
+
+  // Re-align across the first ~1.2s so a late web-font swap (which reflows the
+  // text above the target) can't leave us short; the fonts.ready hook catches
+  // anything slower still.
+  jump();
+  let tries = 0;
+  const timer = setInterval(() => {
+    jump();
+    if (interrupted || ++tries >= 20) clearInterval(timer);
+  }, 60);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(jump);
+}
+
 /* ── Boot ── */
 document.addEventListener("DOMContentLoaded", async () => {
   await applyIncludes();      // inject shared header + contact partials first
@@ -431,8 +467,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const feature = document.getElementById("work-feature");
   const grid = document.getElementById("work-grid");
-  if (feature && grid) renderWork(feature, grid);
+  if (feature && grid) await renderWork(feature, grid);
 
   const cs = document.getElementById("case-study-root");
-  if (cs) renderCaseStudy(cs);
+  if (cs) await renderCaseStudy(cs);
+
+  // Honor #contact etc. only after the async work cards / case body are in the
+  // DOM — they change page height and would otherwise leave the target stale.
+  scrollToInitialHash();
 });

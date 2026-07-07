@@ -22,16 +22,22 @@
   <div class="wrap">
     <article class="legal" id="legal">
       <div class="legal-head">
-        <div>
+        <div class="legal-head-row">
           <h1 data-lang="en">Privacy Policy</h1>
           <h1 data-lang="de">Datenschutzerklärung</h1>
-          <div class="updated" data-lang="en">Last updated: 6 July 2026</div>
-          <div class="updated" data-lang="de">Stand: 6. Juli 2026</div>
+          <div class="lang-switch">
+            <button type="button" class="btn btn-ghost lang-switch-btn" aria-haspopup="listbox" aria-expanded="false">
+              <span class="lang-switch-label">English</span>
+              <i class="ti ti-chevron-down"></i>
+            </button>
+            <ul class="lang-switch-menu" role="listbox" aria-label="Language" hidden>
+              <li role="option" data-set="en" aria-selected="true">English</li>
+              <li role="option" data-set="de" aria-selected="false">Deutsch</li>
+            </ul>
+          </div>
         </div>
-        <div class="lang-switch" role="group" aria-label="Language">
-          <button type="button" data-set="en">EN</button>
-          <button type="button" data-set="de">DE</button>
-        </div>
+        <div class="updated" data-lang="en">Last updated: 6 July 2026</div>
+        <div class="updated" data-lang="de">Stand: 6. Juli 2026</div>
       </div>
 
       <!-- ============================= ENGLISH ============================= -->
@@ -153,23 +159,53 @@
   (function () {
     var root = document.getElementById("legal");
     if (!root) return;
-    var buttons = document.querySelectorAll(".lang-switch button");
+    var wrap = document.querySelector(".lang-switch");
+    var btn = wrap.querySelector(".lang-switch-btn");
+    var label = wrap.querySelector(".lang-switch-label");
+    var menu = wrap.querySelector(".lang-switch-menu");
+    var options = wrap.querySelectorAll(".lang-switch-menu li");
+
     function setLang(lang) {
       document.documentElement.lang = lang;
       root.querySelectorAll("[data-lang]").forEach(function (el) {
         el.hidden = el.getAttribute("data-lang") !== lang;
       });
-      buttons.forEach(function (b) {
-        b.classList.toggle("active", b.getAttribute("data-set") === lang);
+      options.forEach(function (o) {
+        var active = o.getAttribute("data-set") === lang;
+        o.setAttribute("aria-selected", active);
+        if (active) label.textContent = o.textContent;
       });
     }
-    buttons.forEach(function (b) {
-      b.addEventListener("click", function () {
-        var lang = b.getAttribute("data-set");
+
+    function openMenu() {
+      menu.hidden = false;
+      btn.setAttribute("aria-expanded", "true");
+    }
+    function closeMenu() {
+      menu.hidden = true;
+      btn.setAttribute("aria-expanded", "false");
+    }
+
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (menu.hidden) openMenu(); else closeMenu();
+    });
+    options.forEach(function (o) {
+      o.addEventListener("click", function () {
+        var lang = o.getAttribute("data-set");
         setLang(lang);
         history.replaceState(null, "", "#" + lang);
+        closeMenu();
+        btn.focus();
       });
     });
+    document.addEventListener("click", function (e) {
+      if (!wrap.contains(e.target)) closeMenu();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeMenu();
+    });
+
     setLang(location.hash.replace("#", "") === "de" ? "de" : "en");
   })();
 </script>
