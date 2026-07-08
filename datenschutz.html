@@ -33,8 +33,8 @@
               <i class="ti ti-chevron-down"></i>
             </button>
             <ul class="lang-switch-menu" role="listbox" aria-label="Language" hidden>
-              <li role="option" data-set="en" aria-selected="true">English</li>
-              <li role="option" data-set="de" aria-selected="false">Deutsch</li>
+              <li role="option" tabindex="0" data-set="en" aria-selected="true">English</li>
+              <li role="option" tabindex="0" data-set="de" aria-selected="false">Deutsch</li>
             </ul>
           </div>
         </div>
@@ -188,24 +188,49 @@
       btn.setAttribute("aria-expanded", "false");
     }
 
+    function selectOption(o) {
+      var lang = o.getAttribute("data-set");
+      setLang(lang);
+      history.replaceState(null, "", "#" + lang);
+      closeMenu();
+      btn.focus();
+    }
+
     btn.addEventListener("click", function (e) {
       e.stopPropagation();
-      if (menu.hidden) openMenu(); else closeMenu();
+      if (menu.hidden) {
+        openMenu();
+        // Options are hidden (and so out of tab order) until now — move
+        // focus to the current selection so Tab continues into the list
+        // instead of skipping past it to whatever follows the widget.
+        (wrap.querySelector('[aria-selected="true"]') || options[0]).focus();
+      } else {
+        closeMenu();
+      }
     });
     options.forEach(function (o) {
-      o.addEventListener("click", function () {
-        var lang = o.getAttribute("data-set");
-        setLang(lang);
-        history.replaceState(null, "", "#" + lang);
-        closeMenu();
-        btn.focus();
+      o.addEventListener("click", function () { selectOption(o); });
+      o.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          selectOption(o);
+        }
       });
+    });
+    // Tabbing out of the widget (forward past the last option, or backward
+    // past the button) should close the menu rather than leave it open
+    // and orphaned behind whatever gets focus next.
+    wrap.addEventListener("focusout", function (e) {
+      if (!wrap.contains(e.relatedTarget)) closeMenu();
     });
     document.addEventListener("click", function (e) {
       if (!wrap.contains(e.target)) closeMenu();
     });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeMenu();
+      if (e.key === "Escape" && !menu.hidden) {
+        closeMenu();
+        btn.focus();
+      }
     });
 
     setLang(location.hash.replace("#", "") === "de" ? "de" : "en");
