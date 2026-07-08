@@ -87,6 +87,11 @@
 
 * { box-sizing: border-box; }
 
+/* Reserve space for the sticky header when the browser scrolls a focused or
+   linked element into view — otherwise it can land right under the header,
+   since geometry-only viewport checks don't know the header covers it. */
+html { scroll-padding-top: 92px; }
+
 /* Consistent accent focus ring for all interactive elements (no UA default) */
 a:focus-visible,
 button:focus-visible,

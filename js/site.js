@@ -409,6 +409,18 @@ function initChrome() {
       );
     }
   }
+  // Case cards are tall enough (~half a viewport) that browsers' default
+  // "nearest" focus-scroll heuristic can decide a card is "visible enough"
+  // once its neighbor's scroll left a sliver of it on-screen, and skip
+  // scrolling — making every other card seem to get tabbed past. Force a
+  // deterministic top-aligned scroll on every card focus instead. Delegated
+  // on document (via "focusin", which bubbles, unlike "focus") since cards
+  // are injected by renderWork() after initChrome() runs.
+  document.addEventListener("focusin", (e) => {
+    const card = e.target.closest(".case-card");
+    if (card) card.scrollIntoView({ block: "start" });
+  });
+
   // If an "index.html#section" link points at a section that exists on THIS
   // page (e.g. #contact on a case study), rewrite it to an in-page anchor so it
   // smooth-scrolls instead of navigating to the home page.
