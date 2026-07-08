@@ -368,7 +368,7 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
 /* ===== Legal pages (privacy policy) ===== */
 .legal { max-width: 760px; margin: 0 auto; padding: 52px 0 24px; }
 .legal-head { margin-bottom: 28px; }
-.legal-head-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+.legal-head-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin-bottom: 16px; }
 .legal h1 { font-size: clamp(30px, 4vw, 44px); line-height: 1.06; letter-spacing: var(--track-display); font-weight: 600; margin: 0; }
 .legal .updated { font-family: var(--mono); font-size: var(--text-md); letter-spacing: var(--track-quiet); color: var(--muted); margin-top: 6px; }
 .lang-switch { position: relative; flex: 0 0 auto; }
@@ -600,4 +600,6 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
   .photo-frame { max-width: none; transform: none; }
   .hero .stats { flex-direction: column; align-items: center; }
   .contact-card { padding: 40px 28px; }
+  .legal-head-row { flex-direction: column; align-items: flex-start; }
+  .legal-head-row .lang-switch { order: -1; }
 }

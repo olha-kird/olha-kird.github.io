@@ -395,7 +395,14 @@ function initChrome() {
         menuBtn.querySelector("i").className = open ? "ti ti-x" : "ti ti-menu-2";
       };
       setOpen(false);
-      menuBtn.addEventListener("click", () => setOpen(!hdr.classList.contains("nav-open")));
+      menuBtn.addEventListener("click", () => {
+        const open = !hdr.classList.contains("nav-open");
+        setOpen(open);
+        // .nav-links sits before menuBtn in the DOM, so once it's revealed,
+        // move focus into it — otherwise Tab from menuBtn skips straight
+        // past the now-visible links to whatever follows the header.
+        if (open) hdr.querySelector(".nav-links a")?.focus();
+      });
       // close after picking a destination
       hdr.querySelectorAll(".nav-links a").forEach((a) =>
         a.addEventListener("click", () => setOpen(false))
