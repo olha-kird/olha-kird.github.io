@@ -379,6 +379,32 @@ async function applyIncludes() {
 }
 
 /* sticky-header shadow + smooth anchor scroll (runs after the header is injected) */
+/* Track whether a button was activated via keyboard (Enter/Space) or a
+   pointer (mouse/touch), so callers that move focus elsewhere afterwards
+   can decide whether a visible focus ring is warranted there. keydown
+   always precedes the synthesized click for keyboard activation; pointerdown
+   always precedes click for pointer activation — so whichever fired last
+   right before "click" tells us the source. */
+function trackActivationSource(el) {
+  el.addEventListener("pointerdown", () => { el.dataset.viaKeyboard = "0"; });
+  el.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") el.dataset.viaKeyboard = "1";
+  });
+}
+
+/* Move focus to `el` after a button activation. If that activation wasn't
+   via keyboard, suppress the focus ring on `el` — browsers' :focus-visible
+   heuristic doesn't reliably do this itself when focus jumps to a different
+   element than the one actually pointed at (see .suppress-ring in styles.css). */
+function focusFollowingActivation(el, viaKeyboard) {
+  if (!el) return;
+  if (!viaKeyboard) {
+    el.classList.add("suppress-ring");
+    el.addEventListener("blur", () => el.classList.remove("suppress-ring"), { once: true });
+  }
+  el.focus();
+}
+
 function initChrome() {
   const hdr = document.getElementById("hdr");
   if (hdr) {
@@ -395,13 +421,14 @@ function initChrome() {
         menuBtn.querySelector("i").className = open ? "ti ti-x" : "ti ti-menu-2";
       };
       setOpen(false);
+      trackActivationSource(menuBtn);
       menuBtn.addEventListener("click", () => {
         const open = !hdr.classList.contains("nav-open");
         setOpen(open);
         // .nav-links sits before menuBtn in the DOM, so once it's revealed,
         // move focus into it — otherwise Tab from menuBtn skips straight
         // past the now-visible links to whatever follows the header.
-        if (open) hdr.querySelector(".nav-links a")?.focus();
+        if (open) focusFollowingActivation(hdr.querySelector(".nav-links a"), menuBtn.dataset.viaKeyboard === "1");
       });
       // close after picking a destination
       hdr.querySelectorAll(".nav-links a").forEach((a) =>

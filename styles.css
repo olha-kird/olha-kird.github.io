@@ -92,13 +92,24 @@
    since geometry-only viewport checks don't know the header covers it. */
 html { scroll-padding-top: 92px; }
 
-/* Consistent accent focus ring for all interactive elements (no UA default) */
-a:focus-visible,
-button:focus-visible,
-select:focus-visible,
-[tabindex]:focus-visible {
+/* Consistent accent focus ring for all interactive elements (no UA default).
+   :not(.suppress-ring) excludes focus we move programmatically after a tap
+   or click — see focusFollowingActivation() in js/site.js — since browsers'
+   own :focus-visible heuristic doesn't reliably suppress the ring when
+   script moves focus to an element other than the one actually pointed at. */
+a:focus-visible:not(.suppress-ring),
+button:focus-visible:not(.suppress-ring),
+select:focus-visible:not(.suppress-ring),
+[tabindex]:focus-visible:not(.suppress-ring) {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* Without this, the browser's own default :focus-visible ring (e.g.
+   Chrome's UA "outline: auto") shows through once the rule above stops
+   applying, since suppressing our override alone doesn't clear it. */
+.suppress-ring:focus-visible {
+  outline: none;
 }
 
 body {

@@ -196,6 +196,7 @@
       btn.focus();
     }
 
+    trackActivationSource(btn);
     btn.addEventListener("click", function (e) {
       e.stopPropagation();
       if (menu.hidden) {
@@ -203,7 +204,9 @@
         // Options are hidden (and so out of tab order) until now — move
         // focus to the current selection so Tab continues into the list
         // instead of skipping past it to whatever follows the widget.
-        (wrap.querySelector('[aria-selected="true"]') || options[0]).focus();
+        // focusFollowingActivation() (js/site.js) also suppresses the ring
+        // when this was a tap/click, not a real keyboard activation.
+        focusFollowingActivation(wrap.querySelector('[aria-selected="true"]') || options[0], btn.dataset.viaKeyboard === "1");
       } else {
         closeMenu();
       }
