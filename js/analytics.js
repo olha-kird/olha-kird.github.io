@@ -6,7 +6,7 @@
   var POSTHOG_KEY = "phc_zHi6GBzfxwqnpT8H5Vj9nBiNRNf5WmaMCgn2WqzptXs4";
 
   // Don't load analytics on local development.
-  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return;
+  if (location.protocol === "file:" || location.hostname === "localhost" || location.hostname === "127.0.0.1") return;
 
   // Flag/unflag this browser as internal via URL (handy on mobile, no console needed):
   //   https://your-site/?ph_internal=1  → opt out of analytics on this device

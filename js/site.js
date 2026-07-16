@@ -224,6 +224,51 @@ async function renderWork(featureEl, gridEl) {
   observeReveals(gridEl);
 }
 
+/* ── Homepage: process steps ── */
+const ICONS_DIR = "assets/tabler/icons";
+const iconCache = {};
+
+/* Fetches a stroke-based Tabler SVG (see assets/tabler/icons/) and caches
+   the raw markup — used instead of the icon font so stroke-width is a real
+   CSS property (font glyphs are flattened fills, no stroke to control). */
+async function loadIconSvg(name) {
+  if (name in iconCache) return iconCache[name];
+  try {
+    const raw = await (await fetch(`${ICONS_DIR}/${name}.svg`)).text();
+    const svg = (raw.match(/<svg[\s\S]*<\/svg>/) || [""])[0]
+      .replace("<svg", '<svg class="step-icon" aria-hidden="true" focusable="false"');
+    iconCache[name] = svg;
+    return svg;
+  } catch (e) {
+    console.error("Could not load icon:", name, e);
+    iconCache[name] = "";
+    return "";
+  }
+}
+
+async function renderProcess(trackEl) {
+  let meta;
+  try { ({ meta } = parseFrontmatter(await (await fetch("content/process.md")).text())); }
+  catch (e) { console.error("Could not load process content:", e); return; }
+
+  const steps = meta.steps || [];
+  const icons = await Promise.all(steps.map((s) => (s.icon ? loadIconSvg(s.icon) : "")));
+
+  trackEl.innerHTML = steps.map((s, i) => {
+    const items = (s.items || []).map((it) => `<li>${escapeHtml(it)}</li>`).join("");
+    return `
+      <div class="step reveal">
+        <div class="step-head">
+          <h4>${escapeHtml(s.title || "")}</h4>
+          ${icons[i]}
+        </div>
+        <ul class="step-list">${items}</ul>
+      </div>`;
+  }).join("");
+
+  observeReveals(trackEl);
+}
+
 /* ── Case study page ── */
 function stickyRowMarkup(meta) {
   const items = [
@@ -514,6 +559,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const feature = document.getElementById("work-feature");
   const grid = document.getElementById("work-grid");
   if (feature && grid) await renderWork(feature, grid);
+
+  const processTrack = document.getElementById("process-track");
+  if (processTrack) await renderProcess(processTrack);
 
   const cs = document.getElementById("case-study-root");
   if (cs) await renderCaseStudy(cs);
