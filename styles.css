@@ -325,6 +325,7 @@ a.case-card .cc-tags .chip { font-size: var(--text-xs); padding: 4px 10px; }
 .process-track .step:nth-child(3n)   { transform: rotate(-0.8deg); }
 .step-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .step-icon {
+  display: none; /* hidden for now, keeping the markup/styling in place */
   position: absolute; top: 14px; right: 14px;
   width: 64px; height: 64px;
   color: var(--accent);
