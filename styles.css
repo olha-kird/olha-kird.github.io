@@ -402,6 +402,15 @@ a.case-card .cc-tags .chip { font-size: var(--text-xs); padding: 4px 10px; }
                         stays 0 so --hole-cx / --slot-cx keep measuring from the paper's
                         left edge. */
   background: var(--paper-card); border: 1px solid var(--line); border-radius: 4px;
+  /* Left border is taken out of the box model and redrawn as an inset hairline.
+     Reason: the hole rows are inset vertically via content-box mask-clip (below);
+     content-box also sits 1px inside the *left* border, which clipped each slot's
+     cut 1px short of the edge and left a stray 1px border sliver capping every
+     slot mouth. Dropping the left border makes content-box (and the slot cut)
+     reach the true edge; the inset shadow is part of the element, so the slots
+     still breach it. */
+  border-left-width: 0;
+  box-shadow: inset 1px 0 0 var(--line);
 
   --hole-cx: 27px;   /* hole centre from the left edge */
   --hole-r: 7px;
