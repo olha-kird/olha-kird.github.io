@@ -258,6 +258,7 @@ async function renderProcess(trackEl) {
     const items = (s.items || []).map((it) => `<li>${escapeHtml(it)}</li>`).join("");
     return `
       <div class="step reveal">
+        <span class="pin"></span>
         <div class="step-head">
           <h4>${escapeHtml(s.title || "")}</h4>
           ${icons[i]}

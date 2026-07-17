@@ -323,6 +323,7 @@ a.case-card .cc-tags .chip { font-size: var(--text-xs); padding: 4px 10px; }
 .process-track .step:nth-child(3n+1) { transform: rotate(-1.2deg); }
 .process-track .step:nth-child(3n+2) { transform: rotate(1deg); }
 .process-track .step:nth-child(3n)   { transform: rotate(-0.8deg); }
+.step .pin { top: -7px; left: 50%; margin-left: -8px; }
 .step-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .step-icon {
   display: none; /* hidden for now, keeping the markup/styling in place */
