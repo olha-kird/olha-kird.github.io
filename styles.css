@@ -366,30 +366,82 @@ a.case-card .cc-tags .chip { font-size: var(--text-xs); padding: 4px 10px; }
 .photo-frame .ph { width: 100%; border-radius: 2px; }
 
 .about-text {
+  /* Rotation + text live here. The paper is a separate decorative layer
+     (.about-paper) so the mask and the drop shadow never touch the text. */
   position: relative;
-  background: var(--paper-card); border: 1px solid var(--line); border-radius: 4px;
-  padding: 36px 32px 36px 64px;
   transform: rotate(-1.5deg);
-  box-shadow: 0 1px 2px rgba(60,50,35,.05), 0 16px 34px -26px rgba(60,50,35,.28);
+  padding: 36px 32px 36px 64px;
+  isolation: isolate;              /* keep the paper layer's z-index local */
+}
+.about-paper {
+  /* Filter carrier: casts the drop shadow, which follows its masked child below,
+     so the holes cut the shadow rather than blocking it. box-shadow can't be used
+     here (the mask would clip it), so this drop-shadow approximates .photo-frame's
+     box-shadow. That box-shadow uses a large negative spread (-30px), which shrinks
+     the shadow shape well inside the box *before* blurring — so by the time it
+     reaches the box edge it's already deep into the blur falloff and reads as a
+     faint, receded haze. drop-shadow has no spread, so it blurs from the full
+     edge outward and reads harsher at any matching blur/alpha. Compensate with a
+     much larger blur (softens the whole falloff) and a lower alpha (mutes the
+     now-larger visible area) rather than matching blur/alpha numerically. */
+  position: absolute; inset: 0; z-index: -1;
+  filter:
+    drop-shadow(0 1px 1px rgba(60,50,35,.05))
+    drop-shadow(0 14px 20px rgba(60,50,35,.1));
+}
+.about-paper::before {
+  /* The actual paper. Real holes are punched by unioning a round hole + a short
+     slot per row and subtracting them, so the dotted page behind shows through. */
+  content: "";
+  position: absolute; inset: 0;
+  box-sizing: border-box;
+  padding: 32px 0;   /* vertical only — insets the hole band (via the content-box
+                        origin+clip below) so the first/last cutouts land inside the
+                        text instead of near the card edges, while the paper fill keeps
+                        its border-box origin and stays full size. Horizontal padding
+                        stays 0 so --hole-cx / --slot-cx keep measuring from the paper's
+                        left edge. */
+  background: var(--paper-card); border: 1px solid var(--line); border-radius: 4px;
+
+  --hole-cx: 27px;   /* hole centre from the left edge */
+  --hole-r: 7px;
+  --slot-cx: 9px;    /* slot centre from the left edge (runs out toward the edge) */
+  --slot-rx: 16px;   /* half-width — deliberately generous: the right end must stay
+                         buried inside the circle and the left end must clear the
+                         paper's left edge, in both cases with margin so the union
+                         has no visible seam and no corner ever peeks out */
+  --slot-ry: 2px;    /* half-height */
+  --hole-pitch: 40px; /* row spacing. "space" fits a whole number of these into the
+                          paper height, so the count scales with the card (denser on
+                          tall mobile cards) — that's why we keep `space` over fixed.
+                          It also leaves a natural top/bottom margin of half a pitch
+                          (~17px), comfortably less than the text's 36px inset, so the
+                          holes frame the text rather than sitting as far in as it. */
+
+  mask-image:
+    linear-gradient(#000 0 0),
+    radial-gradient(circle var(--hole-r) at var(--hole-cx) 50%, #000 98%, #0000 100%),
+    /* Slot as a true rectangle (hard corners), not an ellipse: a vertical band with
+       sharp top/bottom stops, bounded to its own width via mask-size below rather
+       than the gradient's own geometry — an ellipse-based shape can't produce
+       square corners. */
+    linear-gradient(to bottom,
+      transparent 0, transparent calc(50% - var(--slot-ry)),
+      #000 calc(50% - var(--slot-ry)), #000 calc(50% + var(--slot-ry)),
+      transparent calc(50% + var(--slot-ry)), transparent 100%);
+  mask-repeat: no-repeat, no-repeat space, no-repeat space;
+  mask-size: 100% 100%, 100% var(--hole-pitch), calc(var(--slot-rx) * 2) var(--hole-pitch);
+  mask-position: 0 0, 0 0, calc(var(--slot-cx) - var(--slot-rx)) 0;
+  mask-origin: border-box, content-box, content-box; /* paper fill full; hole rows inset by the padding */
+  /* mask-clip must match: `space` distributes over the mask *painting* area (the clip
+     box), NOT the origin box. Without this the rows still spread across the full
+     border-box and the padding above does nothing. */
+  mask-clip: border-box, content-box, content-box;
+  mask-composite: subtract, add, add;
 }
 .about-text p { font-size: var(--text-md); line-height: var(--lh-body); color: var(--ink-soft); font-weight: 300; margin: 0 0 18px; }
 .about-text p:last-child { margin-bottom: 0; }
 .about-text strong { font-weight: 600; color: var(--ink); }
-.notebook-holes {
-  position: absolute; left: 20px; top: 36px; bottom: 36px; width: 14px;
-  display: flex; flex-direction: column; justify-content: space-between; align-items: center;
-}
-.notebook-holes .hole {
-  position: relative; width: 14px; height: 14px; border-radius: 50%;
-  background: var(--paper);
-  box-shadow: inset 0 2px 3px rgba(60,50,35,.35), inset 0 -1px 1px rgba(255,255,255,.6);
-}
-.notebook-holes .hole::before {
-  content: ""; position: absolute; top: 50%; left: -24px; width: 26px; height: 4px;
-  transform: translateY(-50%);
-  background: var(--paper); border-radius: 2px;
-  box-shadow: inset 0 1px 2px rgba(60,50,35,.3);
-}
 
 /* ===== Contact / footer ===== */
 /* contact is the last section now (footer removed) — keep full section padding
