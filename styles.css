@@ -357,8 +357,11 @@ a.case-card .cc-tags .chip { font-size: var(--text-xs); padding: 4px 10px; }
   position: relative;
   display: flex;
   background: #fffefb; border: 1px solid var(--line); border-radius: 4px;
-  padding: 16px; width: 100%; max-width: 400px;
-  box-shadow: 0 1px 2px rgba(60,50,35,.05), 0 22px 46px -30px rgba(60,50,35,.3);
+  padding: 16px; width: 100%; max-width: 380px;
+  /* box-shadow: 0 1px 2px rgba(60,50,35,.05), 0 22px 46px -30px rgba(60,50,35,.3);*/
+  filter:
+    drop-shadow(0 1px 1px rgba(60,50,35,.05))
+    drop-shadow(0 14px 20px rgba(60,50,35,.1));
 }
 .photo-frame .ph { width: 100%; border-radius: 2px; }
 
