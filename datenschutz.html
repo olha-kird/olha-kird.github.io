@@ -8,8 +8,7 @@
 <meta name="referrer" content="no-referrer" />
 <title>Privacy Policy · Datenschutzerklärung — Olha Kirdiaieva</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-<!-- Fonts (Geologica, Geist Mono) are self-hosted via @font-face in styles.css. -->
-<link rel="stylesheet" href="assets/tabler/tabler-icons.min.css" />
+<!-- Fonts are self-hosted via @font-face in styles.css. -->
 <link rel="stylesheet" href="styles.css" />
 <script src="js/analytics.js"></script>
 </head>
@@ -27,14 +26,22 @@
             <h1 data-lang="en">Privacy Policy</h1>
             <h1 data-lang="de">Datenschutzerklärung</h1>
           </div>
+          <!-- Disclosure + two real buttons, deliberately NOT a role="listbox".
+               The listbox role promises arrow-key navigation, a single tab stop
+               and aria-activedescendant; with two options that machinery buys
+               nothing, and claiming the role without implementing it is what
+               WCAG 4.1.2 forbids. Buttons announce honestly and Tab + Enter
+               (which is what the script already handles) is their native
+               behaviour. aria-current marks the active language. -->
           <div class="lang-switch">
-            <button type="button" class="btn btn-ghost lang-switch-btn" aria-haspopup="listbox" aria-expanded="false">
+            <button type="button" class="btn btn-ghost lang-switch-btn"
+                    aria-expanded="false" aria-controls="lang-switch-menu">
               <span class="lang-switch-label">English</span>
               <i class="ti ti-chevron-down"></i>
             </button>
-            <ul class="lang-switch-menu" role="listbox" aria-label="Language" hidden>
-              <li role="option" tabindex="0" data-set="en" aria-selected="true">English</li>
-              <li role="option" tabindex="0" data-set="de" aria-selected="false">Deutsch</li>
+            <ul class="lang-switch-menu" id="lang-switch-menu" aria-label="Language" hidden>
+              <li><button type="button" data-set="en" aria-current="true">English</button></li>
+              <li><button type="button" data-set="de">Deutsch</button></li>
             </ul>
           </div>
         </div>
@@ -165,7 +172,7 @@
     var btn = wrap.querySelector(".lang-switch-btn");
     var label = wrap.querySelector(".lang-switch-label");
     var menu = wrap.querySelector(".lang-switch-menu");
-    var options = wrap.querySelectorAll(".lang-switch-menu li");
+    var options = wrap.querySelectorAll(".lang-switch-menu button");
 
     function setLang(lang) {
       document.documentElement.lang = lang;
@@ -174,7 +181,10 @@
       });
       options.forEach(function (o) {
         var active = o.getAttribute("data-set") === lang;
-        o.setAttribute("aria-selected", active);
+        // aria-current is present-or-absent, not "true"/"false" — an explicit
+        // aria-current="false" is still announced by some screen readers.
+        if (active) o.setAttribute("aria-current", "true");
+        else o.removeAttribute("aria-current");
         if (active) label.textContent = o.textContent;
       });
     }
@@ -206,19 +216,15 @@
         // instead of skipping past it to whatever follows the widget.
         // focusFollowingActivation() (js/site.js) also suppresses the ring
         // when this was a tap/click, not a real keyboard activation.
-        focusFollowingActivation(wrap.querySelector('[aria-selected="true"]') || options[0], btn.dataset.viaKeyboard === "1");
+        focusFollowingActivation(wrap.querySelector('[aria-current="true"]') || options[0], btn.dataset.viaKeyboard === "1");
       } else {
         closeMenu();
       }
     });
+    // Click only — a real <button> already fires click on Enter and Space, so
+    // the keydown handler this replaced was duplicating native behaviour.
     options.forEach(function (o) {
       o.addEventListener("click", function () { selectOption(o); });
-      o.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          selectOption(o);
-        }
-      });
     });
     // Tabbing out of the widget (forward past the last option, or backward
     // past the button) should close the menu rather than leave it open

@@ -47,8 +47,8 @@ function replaceObsidianEmbeds(md) {
       if (parts.length === 2) {
         const [before, after] = parts;
         return `\n<div class="md-compare" style="--pos:50%">` +
-          `<img class="cmp-img cmp-after" src="${escapeHtml(resolveEmbedSrc(after))}" alt="After redesign" draggable="false" />` +
-          `<div class="cmp-before-wrap"><img class="cmp-img cmp-before" src="${escapeHtml(resolveEmbedSrc(before))}" alt="Before redesign" draggable="false" /></div>` +
+          `<img class="cmp-img cmp-after" src="${escapeHtml(resolveEmbedSrc(after))}" alt="After redesign" draggable="false" loading="lazy" decoding="async" />` +
+          `<div class="cmp-before-wrap"><img class="cmp-img cmp-before" src="${escapeHtml(resolveEmbedSrc(before))}" alt="Before redesign" draggable="false" loading="lazy" decoding="async" /></div>` +
           `<div class="cmp-handle" role="slider" tabindex="0" aria-label="Drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">` +
           `<span class="cmp-line"></span>` +
           `<span class="cmp-grip"><i class="ti ti-arrows-move-horizontal"></i></span>` +
@@ -58,7 +58,7 @@ function replaceObsidianEmbeds(md) {
 
     const src = resolveEmbedSrc(inner);
     const label = inner.replace(/^.*\//, "").replace(/\.[a-z0-9]+$/i, "").trim();
-    return `\n<img class="md-embed" src="${escapeHtml(src)}" alt="${escapeHtml(label)}" data-label="${escapeHtml(label)}" />\n`;
+    return `\n<img class="md-embed" src="${escapeHtml(src)}" alt="${escapeHtml(label)}" data-label="${escapeHtml(label)}" loading="lazy" decoding="async" />\n`;
   });
 }
 
@@ -141,10 +141,13 @@ async function fetchStudy(slug) {
   return parseFrontmatter(await res.text());
 }
 
-/* A cover area: real <img> if frontmatter has `cover`, else striped placeholder. */
-function coverMarkup(meta, extraClass, label) {
+/* A cover area: real <img> if frontmatter has `cover`, else striped placeholder.
+   `eager` is for the single above-the-fold case-study hero cover; homepage
+   grid covers (mostly below the fold) default to lazy. */
+function coverMarkup(meta, extraClass, label, eager = false) {
   if (meta.cover) {
-    return `<div class="ph ${extraClass} has-image"><img src="${escapeHtml(meta.cover)}" alt="${escapeHtml(meta.title || "")}" decoding="async" /></div>`;
+    const loading = eager ? "eager" : "lazy";
+    return `<div class="ph ${extraClass} has-image"><img src="${escapeHtml(meta.cover)}" alt="${escapeHtml(meta.title || "")}" loading="${loading}" decoding="async" /></div>`;
   }
   return `<div class="ph ${extraClass}"><span>${escapeHtml(label || "cover coming soon")}</span></div>`;
 }
@@ -260,7 +263,7 @@ async function renderProcess(trackEl) {
       <div class="step reveal">
         <span class="pin"></span>
         <div class="step-head">
-          <h4>${escapeHtml(s.title || "")}</h4>
+          <h3>${escapeHtml(s.title || "")}</h3>
           ${icons[i]}
         </div>
         <ul class="step-list">${items}</ul>
@@ -361,7 +364,7 @@ async function renderCaseStudy(rootEl) {
     </section>
 
     <div class="wrap cs-cover">
-      ${coverMarkup(meta, "", "hero shot — product UI")}
+      ${coverMarkup(meta, "", "hero shot — product UI", true)}
     </div>
 
     <div class="wrap">
@@ -480,6 +483,17 @@ function initChrome() {
       hdr.querySelectorAll(".nav-links a").forEach((a) =>
         a.addEventListener("click", () => setOpen(false))
       );
+      // close on tap-outside or Escape, matching the lang-switch dropdown
+      // on the legal page (see datenschutz.html) — same dismissal pattern.
+      document.addEventListener("click", (e) => {
+        if (hdr.classList.contains("nav-open") && !hdr.contains(e.target)) setOpen(false);
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && hdr.classList.contains("nav-open")) {
+          setOpen(false);
+          menuBtn.focus();
+        }
+      });
     }
   }
   // Case cards are tall enough (~half a viewport) that browsers' default

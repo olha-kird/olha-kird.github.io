@@ -1,7 +1,7 @@
 ---
-title: B2B Gas Station Maintenance
-summary: "Simplifying workflows and improving usability of a 20-year-old report management system serving 5 000+ gas stations."
-tags: [UX research, UI redesign]
+title: Gas Station Maintenance
+summary: "Simplifying workflows and improving usability of a 20-year-old report management system serving 5000+ gas stations."
+tags: [B2B, UX research, UI redesign, 2022 → 2026]
 year: "2022 → 2026 redesign"
 gradient: 4
 cover: images/reports-kanban-ui-cover.png
@@ -12,7 +12,7 @@ testimonial_by: "Head of Product Innovation, quote from the agency review"
 ## Context
 ### UX in the need of maintenance
 
-This project was a redesign of a 20-year-old B2B report management system used primarily by gas stations to keep track of their equipment and perform required maintenance. My goal was to reduce complexity and support the customizable workflows of different user types across 5 000+ stations.
+This project was a redesign of a 20-year-old B2B report management system used primarily by gas stations to keep track of their equipment and perform required maintenance. My goal was to reduce complexity and support the customizable workflows of different user types across 5000+ stations.
 
 As a UX designer at an agency, I was fully responsible for UX research, wireframing, prototyping, and communication with the client. My main deliverable was a UX prototype, the UI was redesigned in 2026 for this case study.
 
@@ -49,10 +49,10 @@ While keeping the original layout, I introduced some UX changes to improve usabi
 - **Quick status change.** Clicking the "Status" chip opens a pop-over that allows users to update the report status without opening a separate page.
 - **Customizable filters.** At the top of the page, there is a ribbon with a set of filters. This set can be edited through the "All Filters" menu by clicking the eye icon next to a filter. Also, users can save a preset of values as a template and load them whenever needed.
 
-### Quick reporting for urgent maintenance
+### Cutting 2 steps for quick reporting
 The most challenging part of the system was the report creation flow. Previously, it was a long and unpredictable form where new questions appeared out of nowhere. This created high friction for users who needed to quickly create reports in order to get the equipment fixed as soon as possible.
 
-After reviewing the information architecture, I was able to simplify the flow by collapsing four different steps into one and then split the form into two pages. This way, I put the required information upfront while moving the optional details to the second page.
+After reviewing the information architecture, I was able to simplify the flow by collapsing 3 different steps into one and then split the form into two pages. This way, I put the required information upfront while moving the optional details to the second page.
 
 ![[reports-new-ui-filled.png]]
 
@@ -62,4 +62,4 @@ Revisiting the project in 2026, this layout could open an opportunity to pre-fil
 ## Outcome
 ### Modernized the 20-year-old UX
 
-As a result of the project, I improved usability and pattern consistency of an outdated system, and simplified workflows for power users through reducing the number of repeated actions. This led to positive feedback from the client and allowed them to continue implementation internally using deliverables from the UI designer at the agency.
+As a result of the project, I improved usability and pattern consistency of an outdated system, and simplified workflows for power users by reducing the number of repeated actions. This led to positive feedback from the client and allowed them to continue implementation internally using deliverables from the UI designer at the agency.

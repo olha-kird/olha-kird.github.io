@@ -1,12 +1,10 @@
 ---
 title: "AI-Extracted Law-Specific Data"
 summary: Improving presentation of AI-extracted legal data to build user trust and increase AI features adoption.
-tags: [Legal tech, AI, Startup]
+tags: [B2B, Legal tech, AI, Startup, 2026]
 year: 2026
 cover: images/legal-data-cover.png
 gradient: 1
-testimonial: "Thanks for your work, Olha! And I looove giving feedback, let's do things like this more often!"
-testimonial_by: "Legal engineer, quote from the comment after completing the internal survey"
 ---
 
 ## Context

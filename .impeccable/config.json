@@ -1,0 +1,23 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "roboto",
+        "createdAt": "2026-07-26T15:25:03.939Z",
+        "reason": "User confirmed Roboto Condensed is intentional (mono role only)"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "styles.css"
+        ],
+        "createdAt": "2026-07-26T15:25:10.140Z",
+        "reason": "User confirmed left-accent border is an intentional recurring editorial pattern"
+      }
+    ]
+  }
+}

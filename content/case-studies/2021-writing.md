@@ -1,7 +1,7 @@
 ---
-title: "B2C Writing Gamification Platform"
+title: "Writing Gamification Platform"
 summary: "Research-based UX redesign of a B2C productivity tool for writers, received 9/10 feedback from the community."
-tags: [UX research, Productivity, Gamification]
+tags: [B2C, UX research, Productivity, Gamification, 2021]
 year: 2021
 gradient: 5
 cover: images/writing-dashboard.png
@@ -17,9 +17,9 @@ This project was a redesign of a web-based writing game that helps users find mo
 ## Process
 ### Community-backed research
 
-The client was passionate about the project and willing to conduct comprehensive research. We discussed and approved the research plan during a stakeholder interview. I started by investigating the current system and getting familiar with established patterns and the information architecture. Then I conducted competitor research to become familiar with common industry patterns.
+The client was passionate about the project and willing to conduct comprehensive research. We discussed and approved the research plan during a stakeholder interview. I started by investigating the current system and the information architecture. Then I conducted competitor research to see how competitors solved similar problems.
 
-Next, we moved to the user research, which included interviews and surveys. The platform had a loyal community of writers, so we quickly found willing research participants.
+Next, I moved to the user research, which included 5 interviews and 2 surveys. The platform had a loyal community of writers, so with client's input I was able to quickly find willing research participants.
 
 Finally, I reviewed the analytics, paying the most attention to the user pathways. This allowed me to check the self-reported data from users and refine the user flow.
 
@@ -36,28 +36,28 @@ One of the main business goals for the client was to improve retention. New user
 
 ### Helping users navigate the system
 
-Another product issue was the lack of a starting page. Previously, the users always landed on the writing page after logging in. However, the quantitative data from surveys and analytics showed that users typically don’t start writing immediately. They usually check their quests, select monsters to battle, and only then get to writing. To support this behavior, we added a customizable dashboard featuring stats and links to other pages.
+Another product issue was the lack of a starting page. Previously, the users always landed on the writing page after logging in. However, the quantitative data from surveys and analytics showed that users typically don’t start writing immediately. They usually check their quests, select monsters to battle, and only then get to writing. To support this behavior, I added a customizable dashboard featuring stats and links to other pages.
 
 ![[writing-dashboard.png]]
 
 ### Decreasing usage of competitor software
 
-Based on the surveys and user interviews, many users type their text into some other software and copy-paste it into the system to receive rewards for the battle. One of the reasons for this behavior was the poor usability of the writing page.
+Based on the surveys and user interviews, many users typed their text into another software and copy-pasted it into the system to receive rewards for the battle. One of the reasons for this behavior was the poor usability of the writing page.
 
-Previously, the system had two separate pages for files and projects. However, during the user research, we discovered that users mostly had just one or two projects for their files. Based on that knowledge, I decided to combine the two pages. I used patterns from competitor research to build a layout that would allow users to organize and navigate their files better.
+Previously, the system had two separate pages for files and projects. However, during the user research, I discovered that users mostly had just one or two projects for their files. Based on that knowledge, I decided to combine the two pages. I used patterns from competitor research to build a layout that would allow users to organize and navigate their files better.
 
 ![[writing-overview.png]]
 ![[writing-editor.png]]
 
 ### Bringing core features together
 
-One of the client’s concerns was that the system was very fragmented. Gaming and writing existed separately, so users had to switch between different pages to complete tasks. That’s why we decided to add a hub for quick access to core product features.
+One of the client’s concerns was that the system was very fragmented. Gaming and writing existed separately, so users had to switch between different pages to complete tasks. That’s why I decided to add a hub for quick access to core product features.
 
-This change was included in a user testing scenario and received a warm welcome from the audience. It helped tie the product together and allowed us to simplify the primary user flows.
+This change was included in a user testing scenario and received a warm welcome from the audience. It helped tie the product together and simplify the primary user flows.
 
 ![[writing-command-center.png]]
 
 ## Outcome
-### Passing the test of time
+### Passed the test of time
 
 The redesign was successfully launched and refined with the community. The writing page structure and the command center are still present in the product with almost no layout changes. The dashboard was simplified but still remains as a place to start the adventure.

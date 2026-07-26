@@ -1,7 +1,7 @@
 ---
-title: "B2B Restaurant Management SaaS"
-summary: "Co-founding a restaurant table management SaaS startup — later acquired by monobank in 2023."
-tags: [0 → 1, Startup, Acquisition]
+title: "Restaurant Management SaaS"
+summary: "Co-founding a restaurant table management SaaS startup that was later acquired by monobank."
+tags: [B2B, 0 → 1, Startup, Acquisition, 2020]
 year: 2020
 gradient: 1
 cover: images/restaurants-timeline.png
@@ -18,9 +18,9 @@ One day, a university friend approached me with a suggestion to help him design 
 That was the moment we realized that we should have at least talked to the restaurant owners first. After a few conversations, we discovered that they didn't want to allow customers to choose a table by themselves. However, we also discovered that the table management process was a mess. And so we found an opportunity to fix it.
 
 ## Process
-### Two designers, one product
+### Two designers, shared vision
 
-I was working together with another founding designer, but conveniently we had different design expertise: I was more UX-focused, and she was more into graphic design. So we did some tasks together, but my main responsibility was to draft new product screens and maintain the component library in Figma.
+I was working together with another founding designer, but conveniently we had different design expertise: I was responsible for the UX and UI, while she focused on the graphic design. So we did some tasks together, but my main responsibility was to draft new product screens and maintain the component library in Figma.
 
 ![[restaurants-components.png]]
 
@@ -34,7 +34,7 @@ The main challenge was designing for the fast-paced restaurant environment — w
 ![[restaurants-timeline.png]]
 ![[restaurants-booking.png]]
 
-Since we started the project in 2020, a significant challenge was the lockdown. It was not easy to test the solution we offered but we still managed to perform some live usability testing and see the product in action.
+Since we started the project in 2020, a significant challenge was the lockdown. It was not easy to test the solution we offered, but we still managed to perform some live usability testing and see the product in action.
 
 ## Outcome
 ### Acquisition

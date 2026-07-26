@@ -1,7 +1,7 @@
 ---
-title: B2B Weather Monitoring Timeline
+title: Weather Monitoring Timeline
 summary: "Building a new product MVP for the existing API of a weather intelligence company with a 50K customer base."
-tags: [0 → 1, MVP, UI redesign]
+tags: [B2B, 0 → 1, MVP, UI redesign, 2023 → 2026]
 year: "2023 → 2026 redesign"
 gradient: 3
 cover: images/weather-cover.png
@@ -11,11 +11,13 @@ testimonial_by: "Chief Development Officer, quote from the agency review"
 
 ## Context
 ### From API to UI
-The client came to our agency with a request to create a B2B weather monitoring SaaS that helps customers protect their physical assets from extreme weather. The client had an existing API offering, but it wasn’t suitable for small customers with no development team. My goal was to create a user-friendly interface that would allow the client to provide their services to a larger audience.
+The client came to our agency with a request to design a B2B weather monitoring SaaS that helps customers protect their physical assets from extreme weather. The client had an existing API offering, but it wasn’t suitable for small customers with no development team. My goal was to create a user-friendly interface that would allow the client to provide their services to a larger audience.
 
 ## Process
 ### Top-down architecture approach
-After gathering the initial requirements, I defined the information architecture and built a user flow that helped me prioritize features and lay a foundation for the wireframes. Users can set up alerts to get notified about extreme weather at selected locations. I used a top-down approach for the alert setup. This means that users can create all necessary data objects during the workflow without interruptions.
+The client has not agreed to user interviews, so instead I used their domain knowledge and insights from desk reseach.
+
+After gathering the initial requirements, I defined the information architecture and built a user flow that helped me prioritize features and lay a foundation for the wireframes. Users can set up alerts to get notified about extreme weather at selected locations. I used a top-down approach for the alert setup, so users can create all necessary data objects during the workflow without interruptions.
 
 ![[weather-flow.png]]
 
@@ -35,6 +37,8 @@ The system is highly customizable and allows users to create custom weather defi
 The weather definitions can be combined with locations and notifications to create an alert which will be triggered if a matching weather event is forecasted.
 
 ![[weather-alerts.png]]
+
+The prototype was validated through internal testing and detailed client feedback.
 
 ## Outcome
 ### Scalable MVP ready for development
