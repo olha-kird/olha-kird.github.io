@@ -17,3 +17,7 @@ Documents/
 
 # ── CV (shared with recruiters directly, never published) ──
 uploads/
+
+# ── Impeccable design-hook cache (local session state, not project config) ──
+# config.json (ignoreRules etc.) stays tracked.
+.impeccable/hook.cache.json
