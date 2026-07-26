@@ -181,6 +181,21 @@ body {
   padding-bottom: 1px;
 }
 
+/* ===== Inline prose link =====
+   Reads as the surrounding text (inherited colour, offset underline) and only
+   picks up the accent on hover, so it never interrupts the sentence. Shared by
+   the hero certificate cards and the about-me paragraphs — one rule so the two
+   can't drift. Case-study prose (.cs-prose a) and the legal pages keep their
+   own treatments: those are link-dense and read better with a visible colour. */
+.cert .ckr a,
+.about-text a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.cert .ckr a:hover,
+.about-text a:hover { color: var(--accent); }
+
 /* ===== Striped image placeholder ===== */
 .ph {
   display: flex; align-items: center; justify-content: center;
@@ -308,7 +323,11 @@ section { padding: 92px 0; }
 .sec-label .t { font-family: var(--mono); font-size: var(--text-md); font-weight: 400; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--muted); }
 .sec-label .rule { flex: 1; height: 1px; background: var(--line); }
 .sec-title { font-size: var(--text-5xl); line-height: 1.05; letter-spacing: var(--track-display); font-weight: 600; margin: 0 0 14px; max-width: 760px; }
-.sec-intro { font-size: var(--text-lg); line-height: var(--lh-body); color: var(--ink-soft); font-weight: 300; max-width: none; margin: 0; }
+.sec-intro { font-size: var(--text-lg); line-height: var(--lh-body); color: var(--ink-soft); font-weight: 300; max-width: none; margin: 0 0 48px; }
+/* The gap from a section's intro down to its first content block. 48px is the
+   default (it matches .about-grid's top margin); the process track sits one
+   step wider because its pinned cards read heavier than the case cards. */
+#process .sec-intro { margin-bottom: 56px; }
 
 /* ===== Hero ===== */
 .hero { padding-top: 78px; padding-bottom: 96px; }
@@ -401,8 +420,6 @@ a.case-card .cc-tags .chip { font-size: var(--text-xs); padding: 4px 10px; }
 }
 .cert .pin { top: -7px; left: 50%; margin-left: -8px; }
 .cert .ckr { font-family: var(--mono); font-size: var(--text-xs); letter-spacing: var(--track-label-sm); text-transform: uppercase; color: var(--muted); }
-.cert .ckr a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
-.cert .ckr a:hover { color: var(--accent); }
 .cert h5 { font-size: var(--text-lg); font-weight: 600; letter-spacing: var(--track-heading-sm); margin: 8px 0; line-height: var(--lh-tight); }
 .cert p { font-size: var(--text-sm); line-height: var(--lh-snug); color: var(--ink-soft); font-weight: 300; margin: 0; }
 .cert .big { font-size: var(--text-3xl); font-weight: 600; color: var(--accent); letter-spacing: var(--track-heading); }

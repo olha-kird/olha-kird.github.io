@@ -229,8 +229,16 @@
     // Tabbing out of the widget (forward past the last option, or backward
     // past the button) should close the menu rather than leave it open
     // and orphaned behind whatever gets focus next.
+    //
+    // Requires a real relatedTarget. A null one means focus went nowhere, which
+    // is exactly what a tap produces on iOS Safari: buttons don't take focus
+    // there, so the option we focused on open blurs to nothing — and that
+    // focusout fires BEFORE the tap's click. Closing here would set the option
+    // to display:none while the finger is still down, so the click never lands
+    // on it and the language never switches. Outside taps and Escape are
+    // already covered by the two document listeners below.
     wrap.addEventListener("focusout", function (e) {
-      if (!wrap.contains(e.relatedTarget)) closeMenu();
+      if (e.relatedTarget && !wrap.contains(e.relatedTarget)) closeMenu();
     });
     document.addEventListener("click", function (e) {
       if (!wrap.contains(e.target)) closeMenu();
