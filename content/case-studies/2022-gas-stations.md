@@ -52,7 +52,7 @@ While keeping the original layout, I introduced some UX changes to improve usabi
 ### Cutting 2 steps for quick reporting
 The most challenging part of the system was the report creation flow. Previously, it was a long and unpredictable form where new questions appeared out of nowhere. This created high friction for users who needed to quickly create reports in order to get the equipment fixed as soon as possible.
 
-After reviewing the information architecture, I was able to simplify the flow by collapsing 3 different steps into one and then split the form into two pages. This way, I put the required information upfront while moving the optional details to the second page.
+After reviewing the information architecture, I was able to simplify the flow by collapsing three different steps into one and then split the form into two pages. This way, I put the required information upfront while moving the optional details to the second page.
 
 ![[reports-new-ui-filled.png]]
 
