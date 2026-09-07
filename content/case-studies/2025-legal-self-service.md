@@ -1,6 +1,6 @@
 ---
 title: "Self-Service Document and Questionnaire Builders"
-summary: Reducing customer onboarding time with self-service features to remove bottlenecks in the CS process.
+summary: "60% reduction in time to first call by addressing the bottlenecks in the CS process."
 tags: [B2B, Legal tech, Startup, 2025]
 year: 2025
 cover: images/legal-document-template.png
@@ -12,18 +12,16 @@ testimonial_by: "Product Manager, feedback after design presentation"
 ## Context
 ### Removing the bottleneck from the CS team
 
-This case study covers two related initiatives that share the same goal – to save time of the CS team on the most time-consuming tasks.
+Our customers are law firms that have their own clients. When a new client requests legal assistance, they need to fill out onboarding documents and questionnaires. Before the initiative, all custom templates were manually created by the CS team, which led to a load of work before they even talked to the customer. The bottleneck was costing the support team many hours of their weekly capacity and slowing down new customer onboardings.
 
-Our customers are law firms that have their own clients. When a new client requests legal assistance, they need to fill out onboarding documents and questionnaires. Before the initiative, all templates were manually created by the CS team. The bottleneck was costing the support team many hours of their weekly capacity and slowing down new customer onboardings.
-
-My goal was to design tools that allow users to complete the setup by themselves.
+My goal was to design tools that allow users to complete the setup by themselves and, as a result, save time for the CS team to onboard customers to the product faster.
 
 ## Process
 ### Starting with the people doing the work
 
 As an in-house UX designer, my role involved the end-to-end design process: performing internal research, identifying pain points, defining user flows, designing new user-facing interfaces, and collaborating with the engineering team to check technical feasibility of the solutions and hand them off for development.
 
-My first task was talking to the customer support managers, since they handle the most complex tasks. Their main responsibility is helping users resolve problems, but they also manually create document templates and questionnaires for new customers. They shared their pain points with the current system, and I analyzed the insights to create a better user experience.
+My first step was talking to the customer support managers, since they handle the most complex tasks. Their main responsibility is helping users resolve problems, but they also manually create document templates and questionnaires for new customers. They shared their pain points with the current system, and I analyzed the insights to create a better user experience.
 
 ## Solution
 ### Request data with a custom questionnaire
@@ -46,8 +44,6 @@ The templates mostly follow the same logic as questionnaires with one key differ
 
 ![[legal-document-template.png]]
 
-The features are also enabled for the CS team during the transition period when they still prepare the documents for new clients. Now in a more user-friendly UI compared to the old admin panel.
-
 ## Outcome
-### Easing the load before the shift is complete
-All designs were successfully implemented using my detailed handoff documentation. The released features have already eased the burden on the CS team and gave them more user-friendly tools to complete complex tasks. My next steps would be to monitor the usage metrics and talk to the customer support team to understand when the new process will be included in the client onboarding.
+### 60% less time to the first call
+The new self-service features allowed the CS team to introduce pre-made templates for different types of customers. This way, the customers are presented with a baseline that they can customize according to their needs. The new process has eased the load on the customer support managers by removing a chunk of manual work and cut the time before the first customer call by 60%.
