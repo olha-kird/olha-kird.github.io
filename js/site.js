@@ -513,7 +513,7 @@ function initChrome() {
   });
 }
 
-/* EXPERIMENT — pointer tilt on case cards. Maps the pointer inside the card to
+/* Pointer tilt on case cards. Maps the pointer inside the card to
    a small rotation (cards are wide, so a few degrees already moves the edges a
    lot), written as CSS vars styled in styles.css.
    Delegated on document because cards are injected by renderWork(). */
