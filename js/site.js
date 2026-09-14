@@ -581,6 +581,53 @@ function scrollToInitialHash() {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(jump);
 }
 
+/* Native Back/Forward restores scroll position from the browser's own cache
+   (bfcache) fine, but when it instead does a full reload — common on the
+   live site — it tries to restore scrollY before the async case cards have
+   rendered, so the page is still short and the restore falls short. Save the
+   homepage's scrollY just before leaving (sessionStorage — a tab-local value,
+   never sent anywhere, cleared when the tab closes — see datenschutz.html),
+   and re-apply it once the page is back to full height. */
+const HOME_SCROLL_KEY = "ps-home-scroll-y";
+
+if (ON_HOME) {
+  window.addEventListener("pagehide", () => {
+    try { sessionStorage.setItem(HOME_SCROLL_KEY, String(window.scrollY)); }
+    catch (e) { /* storage unavailable (e.g. private browsing) — nothing to restore next time */ }
+  });
+}
+
+/* Returns true if it handled the restore, so the boot sequence can skip the
+   coarser hash-anchor jump below (an exact scrollY beats "top of card"). */
+function restoreHomeScroll() {
+  const nav = performance.getEntriesByType("navigation")[0];
+  if (!nav || nav.type !== "back_forward") return false;
+
+  let raw;
+  try { raw = sessionStorage.getItem(HOME_SCROLL_KEY); }
+  catch (e) { return false; }
+  const targetY = parseFloat(raw);
+  if (!Number.isFinite(targetY)) return false;
+
+  // Same re-align-until-stable approach as scrollToInitialHash(), for the
+  // same reason: async cards and font swap keep growing the page underneath.
+  let interrupted = false;
+  const stop = () => { interrupted = true; };
+  window.addEventListener("wheel", stop, { passive: true, once: true });
+  window.addEventListener("touchmove", stop, { passive: true, once: true });
+
+  const jump = () => { if (!interrupted) window.scrollTo({ top: targetY, behavior: "auto" }); };
+
+  jump();
+  let tries = 0;
+  const timer = setInterval(() => {
+    jump();
+    if (interrupted || ++tries >= 20) clearInterval(timer);
+  }, 60);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(jump);
+  return true;
+}
+
 /* ── Boot ── */
 document.addEventListener("DOMContentLoaded", async () => {
   await applyIncludes();      // inject shared header + contact partials first
@@ -599,5 +646,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Honor #contact etc. only after the async work cards / case body are in the
   // DOM — they change page height and would otherwise leave the target stale.
-  scrollToInitialHash();
+  // A native Back/Forward's exact saved scrollY (home page only) takes
+  // priority over the coarser hash-anchor jump when both could apply.
+  const restoredScroll = ON_HOME && restoreHomeScroll();
+  if (!restoredScroll) scrollToInitialHash();
 });
