@@ -1,7 +1,7 @@
 ---
 title: "0 → 1 startup acquired by monobank"
 summary: "Co-founding a restaurant table management SaaS startup with university friends."
-tags: [B2B, 0 → 1, Startup, Acquisition, 2020]
+tags: [B2B, 0 → 1, Hospitality, Startup, Acquisition, 2020]
 year: 2020
 cover: images/restaurants-timeline.png
 color: FFE6DE

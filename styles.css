@@ -336,7 +336,7 @@ section { padding: 92px 0; }
 /* ===== Hero ===== */
 .hero { padding-top: 78px; padding-bottom: 96px; }
 .hero-inner { display: block; text-align: center; }
-.hero-eyebrow { font-size: clamp(16px, 1.6vw, 24px); letter-spacing: 0.12em; color: var(--accent); }
+.hero-eyebrow { font-size: clamp(20px, 1.6vw, 24px); letter-spacing: 0.12em; color: var(--accent); }
 .hero h1 { font-size: clamp(42px, 6vw, 76px); line-height: 1.0; letter-spacing: var(--track-display); font-weight: 600; margin: 18px auto 60px; max-width: 18ch; }
 /* stats restyled as the "wall of certificates": pinned paper cards.
    Cards hug their content (variety of widths) and the rows are centered.
@@ -369,7 +369,8 @@ section { padding: 92px 0; }
 .work-grid { margin-top: 28px; }
 a.case-card {
   text-decoration: none; color: var(--ink); display: flex; flex-direction: row; align-items: stretch;
-  background: var(--paper-card); border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
+  background: var(--paper-card); border: 1px solid var(--line); border-radius: 8px;
+  padding: 24px; gap: 48px;
   box-shadow: 0 1px 2px rgba(60,50,35,.05), 0 16px 34px -26px rgba(60,50,35,.28);
   /* Reveal fade (opacity .6s) lives here too — otherwise this rule's higher
      specificity would override .reveal's transition and the card would snap in.
@@ -380,10 +381,12 @@ a.case-card:hover { transform: translateY(-4px); box-shadow: 0 1px 2px rgba(60,5
 /* Cover keeps its original 16:10 shape and defines the card height; the body
    centres within it. Narrowed from 56% to shrink the card without distorting
    the image — cc-body's flex:1 absorbs the freed width automatically. */
-a.case-card .cover { flex: 0 0 50%; align-self: stretch; aspect-ratio: 16 / 10; display: block; }
+a.case-card .cover {
+  flex: 0 0 50%; align-self: stretch; aspect-ratio: 16 / 10; display: block;
+  border: 1px solid var(--line-soft); border-radius: 4px; overflow: hidden;
+}
 a.case-card .cc-body {
   flex: 1; display: flex; flex-direction: column; justify-content: center;
-  padding: 40px 48px; border-left: 1px solid var(--line);
 }
 a.case-card .yr { display: none; }
 a.case-card h3 { font-size: var(--text-2xl); line-height: var(--lh-tight); letter-spacing: var(--track-heading-sm); font-weight: 600; margin: 0 0 12px; }
@@ -635,7 +638,7 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
 .cs-prose li::before { content: "\2192"; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
 .cs-prose blockquote {
   margin: 28px 0; background: var(--paper-card); border: 1px solid var(--line); border-left: 3px solid var(--accent);
-  border-radius: 6px; padding: 22px 28px; box-shadow: 0 1px 2px rgba(60,50,35,.05), 0 18px 40px -30px rgba(60,50,35,.3);
+  border-radius: 0 6px 6px 0; padding: 22px 28px; box-shadow: 0 1px 2px rgba(60,50,35,.05), 0 18px 40px -30px rgba(60,50,35,.3);
 }
 .cs-prose blockquote p { font-size: var(--text-lg); line-height: 1.5; color: var(--ink); font-weight: 400; margin: 0; }
 .cs-prose code { font-family: var(--mono); font-size: var(--text-sm); background: var(--paper-card2); border: 1px solid var(--line); padding: 1px 6px; border-radius: 4px; }
@@ -785,9 +788,9 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
    the cover past its ratio and object-fit:cover crops it — stacking earlier
    avoids that mismatch entirely. */
 @media (max-width: 1024px) {
-  a.case-card { flex-direction: column; }
-  a.case-card .cover { flex: none; width: 100%; }
-  a.case-card .cc-body { padding: 24px 28px 28px; justify-content: flex-start; border-left: none; border-top: 1px solid var(--line); }
+  a.case-card { flex-direction: column; padding: 0; gap: 0; overflow: hidden; }
+  a.case-card .cover { flex: none; width: 100%; border: none; border-radius: 0; }
+  a.case-card .cc-body { padding: 24px 28px 28px; justify-content: flex-start; border-top: 1px solid var(--line); }
   a.case-card h3 { font-size: var(--text-xl); }
   a.case-card p { font-size: var(--text-sm); line-height: var(--lh-snug); }
 }
