@@ -160,7 +160,13 @@ const revealIO = new IntersectionObserver(
         e.target.classList.add("in");
         // Drop the compositor hint only once the fade finishes — clearing it
         // mid-transition forces a re-raster (visible on the image-heavy cards).
-        e.target.addEventListener("transitionend", () => { e.target.style.willChange = "auto"; }, { once: true });
+        // The stagger delay goes too: it applies to every transition, so left
+        // in place it would also delay hover effects (and fully block the
+        // per-pointermove case-card tilt, which restarts before it elapses).
+        e.target.addEventListener("transitionend", () => {
+          e.target.style.willChange = "auto";
+          e.target.style.transitionDelay = "";
+        }, { once: true });
         revealIO.unobserve(e.target);
       }
     });
@@ -172,9 +178,11 @@ function observeReveals(root = document) {
     // Stagger by the element's position among its reveal-siblings in the same
     // container, so each group (a grid row, the process cards, a header block)
     // cascades in DOM order — independent of how many reveals precede it on the
-    // page. Capped so long lists don't drag.
+    // page. Capped so long lists don't drag. Case cards are exempt: they stack
+    // one per row, so they enter the viewport one at a time and a stagger would
+    // only make some of them arrive late.
     const sibs = [...el.parentElement.children].filter((c) => c.classList.contains("reveal"));
-    const idx = Math.max(0, sibs.indexOf(el));
+    const idx = el.classList.contains("case-card") ? 0 : Math.max(0, sibs.indexOf(el));
     el.style.transitionDelay = Math.min(idx, 3) * 80 + "ms";
     revealIO.observe(el);
   });
@@ -482,6 +490,8 @@ function initChrome() {
     if (card) card.scrollIntoView({ block: "start" });
   });
 
+  initCardTilt();
+
   // If an "index.html#section" link points at a section that exists on THIS
   // page (e.g. #contact on a case study), rewrite it to an in-page anchor so it
   // smooth-scrolls instead of navigating to the home page.
@@ -500,6 +510,38 @@ function initChrome() {
         if (t) { ev.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 32, behavior: "smooth" }); }
       }
     });
+  });
+}
+
+/* EXPERIMENT — pointer tilt on case cards. Maps the pointer inside the card to
+   a small rotation (cards are wide, so a few degrees already moves the edges a
+   lot), written as CSS vars styled in styles.css.
+   Delegated on document because cards are injected by renderWork(). */
+const TILT_MAX_DEG = 2;
+function initCardTilt() {
+  const mq = window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+  let frame = 0;
+
+  document.addEventListener("pointermove", (e) => {
+    if (!mq.matches) return;
+    const card = e.target.closest?.(".case-card");
+    if (!card) return;
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;   // 0 → 1
+      const y = (e.clientY - r.top) / r.height;
+      card.classList.add("is-tilting");
+      card.style.setProperty("--ry", `${((x - 0.5) * 2 * TILT_MAX_DEG).toFixed(2)}deg`);
+      card.style.setProperty("--rx", `${((0.5 - y) * 2 * TILT_MAX_DEG).toFixed(2)}deg`);    });
+  });
+
+  document.addEventListener("pointerout", (e) => {
+    const card = e.target.closest?.(".case-card");
+    if (!card || card.contains(e.relatedTarget)) return;
+    cancelAnimationFrame(frame);
+    card.classList.remove("is-tilting");
+    ["--rx", "--ry"].forEach((p) => card.style.removeProperty(p));
   });
 }
 

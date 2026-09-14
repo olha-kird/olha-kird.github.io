@@ -424,6 +424,20 @@ a.case-card {
   transition: opacity .6s ease-out, transform .25s ease, box-shadow .25s ease;
 }
 a.case-card:hover { transform: translateY(-4px); box-shadow: 0 1px 2px rgba(var(--shadow-ink),.05), 0 26px 46px -28px rgba(var(--shadow-ink),.34); }
+
+/* EXPERIMENT — pointer tilt. initCardTilt() in site.js feeds the pointer
+   position in as --rx/--ry (deg). Only active on fine hover pointers without
+   reduced motion (the JS gates on the same query), so touch and reduced-motion
+   keep the plain lift above. No glare/sheen — kept flat to stay paper-like. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  a.case-card { --rx: 0deg; --ry: 0deg; }
+  a.case-card:hover {
+    transform: perspective(1600px) translateY(-4px) rotateX(var(--rx)) rotateY(var(--ry));
+  }
+  /* While the pointer moves, a short transform ease smooths the per-frame
+     updates without lagging; on leave the base .25s eases it back flat. */
+  a.case-card.is-tilting { transition: opacity .6s ease-out, transform .12s ease-out, box-shadow .25s ease; }
+}
 /* Cover keeps its original 16:10 shape and defines the card height; the body
    centres within it. row-reverse above puts the cover on the right, body on
    the left, while the markup order (cover first) stays the reading/DOM order.

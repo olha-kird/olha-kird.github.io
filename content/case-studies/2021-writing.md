@@ -19,13 +19,17 @@ This project was a redesign of a web-based writing game that helps users find mo
 
 The client was passionate about the project and willing to conduct comprehensive research. We discussed and approved the research plan during a stakeholder interview. I started by investigating the current system and the information architecture. Then I conducted competitor research to see how competitors solved similar problems.
 
-Next, I moved to the user research, which included 5 interviews and 2 surveys. The platform had a loyal community of writers, so with client's input I was able to quickly find willing research participants.
+Next, I moved to the user research, which included **5 interviews** and **2 surveys**. The platform had a loyal community of writers, so with the client's input I was able to quickly find willing research participants.
 
-Finally, I reviewed the analytics, paying the most attention to the user pathways. This allowed me to check the self-reported data from users and refine the user flow.
+The first survey was focused on learning about the audience, their habits and motivations. The second one covered the usage of the platform itself. An interesting finding was that writers, unsurprisingly, really like to use the "Other" option in surveys, which led to a longer processing time of the responses. In the second survey, I cut the open-ended options in multiple choice questions to keep the data quantitative.
+
+![[writing-surveys.png]]
+
+Finally, I reviewed the analytics, paying the most attention to the user pathways. This allowed me to check the self-reported data from the interviews and surveys to refine the user flow.
 
 ![[writing-flow.png]]
 
-After completing the research stage, I analyzed the findings and defined several priority issues for the redesign. Then, I started building the updated prototype module by module. Every part of the process was discussed with the client and updated according to the feedback. For the priority modules, I also conducted unmoderated user testing with the interactive UX prototypes in Figma and gathered feedback in a qualitative survey.
+After completing the research stage, I analyzed the findings and defined several priority issues for the redesign. Then, I started building the updated prototype module by module. Every part of the process was discussed with the client and updated according to the feedback. For the priority modules, I also conducted unmoderated user testing with the interactive UX prototypes in Figma and gathered feedback from the users in a qualitative survey.
 
 ## Solution
 ### Improving retention through onboarding
