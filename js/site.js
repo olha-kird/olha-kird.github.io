@@ -216,7 +216,7 @@ async function renderWork(featureEl, gridEl) {
       .map((t) => `<span class="chip">${escapeHtml(t)}</span>`)
       .join("");
     return `
-      <a href="${href}" class="case-card reveal">
+      <a href="${href}" id="case-${escapeHtml(s.slug)}" class="case-card reveal">
         ${coverMarkup(s.meta, "cover", s.meta.industry || "cover coming soon")}
         <div class="cc-body">
           <span class="yr">${escapeHtml(String(s.meta.year || ""))}</span>
@@ -338,7 +338,7 @@ async function renderCaseStudy(rootEl) {
   rootEl.innerHTML = `
     <section class="cs-hero">
       <div class="wrap">
-        <a class="back-link" href="index.html#cases"><i class="ti ti-arrow-left"></i> All work</a>
+        <a class="back-link" href="index.html#case-${encodeURIComponent(slug)}"><i class="ti ti-arrow-left"></i> All work</a>
         <div class="case-tags">${tags}</div>
         <h1>${escapeHtml(meta.title || slug)}</h1>
         ${meta.summary ? `<p class="lead">${escapeHtml(meta.summary)}</p>` : ""}
@@ -487,7 +487,7 @@ function initChrome() {
   // are injected by renderWork() after initChrome() runs.
   document.addEventListener("focusin", (e) => {
     const card = e.target.closest(".case-card");
-    if (card) card.scrollIntoView({ block: "start" });
+    if (card && card.matches(":focus-visible")) card.scrollIntoView({ block: "start" });
   });
 
   initCardTilt();

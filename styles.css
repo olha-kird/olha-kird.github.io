@@ -626,8 +626,8 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
 .legal-head-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin-bottom: 16px; }
 .legal h1 { font-size: clamp(30px, 4vw, 44px); line-height: 1.06; letter-spacing: var(--track-display); font-weight: 600; margin: 0; }
 .lang-switch { position: relative; flex: 0 0 auto; }
-.lang-switch-btn { padding: 10px 18px; font-size: 14px; }
-.lang-switch-btn i { font-size: 16px; transition: transform .15s ease; }
+.lang-switch-btn { padding: 10px 18px; font-size: var(--text-sm); }
+.lang-switch-btn i { font-size: var(--text-md); transition: transform .15s ease; }
 .lang-switch-btn[aria-expanded="true"] i { transform: rotate(180deg); }
 .legal .lang-switch-menu {
   position: absolute; top: calc(100% + 6px); right: 0; z-index: 10;
@@ -674,7 +674,7 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
 .cs-hero { padding: 56px 0 40px; }
 .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-soft); text-decoration: none; font-weight: 500; font-size: var(--text-sm); margin-bottom: 34px; }
 .back-link:hover { color: var(--accent); }
-.cs-hero h1 { font-size: clamp(38px, 5vw, 64px); line-height: 1.0; letter-spacing: var(--track-display); font-weight: 600; margin: 18px 0 22px; max-width: none; }
+.cs-hero h1 { font-size: clamp(38px, 5vw, 56px); line-height: 1.0; letter-spacing: var(--track-display); font-weight: 600; margin: 18px 0 22px; max-width: none; }
 .cs-hero .lead { font-size: var(--text-lg); line-height: var(--lh-body); color: var(--ink-soft); font-weight: 300; max-width: none; margin: 0; }
 
 .cs-cover { position: relative; margin: 14px auto 0; }
@@ -872,6 +872,15 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
   .cs-cover .ph { height: 320px; }
   .nav-links { display: none; }
   .menu-btn { display: flex; }
+  .brand-photo { display: none; }
+  .cs-hero h1 { font-size: clamp(32px, 5vw, 64px); }
+  .cs-prose h2 { font-size: var(--text-sm); }
+  .cs-prose h3 { font-size: var(--text-2xl); }
+  .hero h1 { font-size: clamp(36px, 6vw, 76px); }
+  .sec-title { font-size: var(--text-4xl); }
+  .contact-card h2 { font-size: clamp(30px, 4vw, 54px); }
+  .legal h2 { font-size: var(--text-xl); }
+  .legal h3 { font-size: var(--text-md); }
   /* Header strip and menu panel are ONE blur surface, not two stacked ones.
      Each backdrop-filter samples only the backdrop under its own box and clamps
      at its edges, so two layers meeting at y=74px blur the same text from

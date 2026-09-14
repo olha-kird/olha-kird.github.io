@@ -1,10 +1,9 @@
 ---
-title: "60% reduced time to first call with law firms"
-summary: "Introducing self-service onboarding features to address bottlenecks in the CS process."
+title: "60% reduced time to first CS call"
+summary: "Introducing self-service features to speed up law firm onboarding and decrease the CS workload."
 tags: [B2B, Legal tech, Startup]
 year: 2025
 cover: images/legal-document-template.png
-color: F3E8FF
 testimonial: "Olha showed great ability to quickly understand the customer's processes and presented them in an easy to understand and extendable way. Because I'm a huge fan of iteration I value that a lot."
 testimonial_by: "Product Manager, feedback after design presentation"
 ---

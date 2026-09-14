@@ -1,10 +1,9 @@
 ---
-title: "Research-based redesign rated 9/10 by the community"
-summary: "Improving the UX of a productivity and gamification tool for writers."
+title: "Research-based redesign rated 9/10 by the writing community"
+summary: "Improving the UX of a productivity and gamification tool, validated directly with the users."
 tags: [B2C, UX research, Productivity, Gamification]
 year: 2021
 cover: images/writing-dashboard.png
-color: E6E6E6
 testimonial: "The results so far have been fantastic! We shared a preview of our work with our community and even drastic changes got ratings of 9/10 and higher."
 testimonial_by: "Founder, quote from the agency review"
 ---

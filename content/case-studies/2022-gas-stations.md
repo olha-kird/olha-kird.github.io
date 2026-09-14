@@ -4,7 +4,6 @@ summary: "Improving usability of an asset management system serving 5,000+ gas s
 tags: [B2B, UX research, UI redesign]
 year: "2022 → 2026 redesign"
 cover: images/reports-kanban-ui-cover.png
-color: FBE6C4
 testimonial: "We were able to reduce the number of steps necessary to complete the tasks our users perform most while also increasing the visibility of those tasks in such a way that errors and missteps were reduced."
 testimonial_by: "Head of Product Innovation, quote from the agency review"
 ---
