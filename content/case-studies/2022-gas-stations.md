@@ -1,7 +1,7 @@
 ---
 title: "Simplified workflows for a 20-year-old maintenance system"
 summary: "Improving usability of an asset management system serving 5,000+ gas stations."
-tags: [B2B, UX research, UI redesign, 2022 → 2026]
+tags: [B2B, UX research, UI redesign]
 year: "2022 → 2026 redesign"
 cover: images/reports-kanban-ui-cover.png
 color: FBE6C4

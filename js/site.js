@@ -274,18 +274,6 @@ async function renderProcess(trackEl) {
 }
 
 /* ── Case study page ── */
-function stickyRowMarkup(meta) {
-  const items = [
-    { cls: "sticky-blue",   k: "Goal",          b: meta.sticky_goal },
-    { cls: "sticky-yellow", k: "The challenge", b: meta.sticky_challenge },
-    { cls: "sticky-green",  k: "My role",        b: meta.sticky_role },
-  ].filter((i) => i.b);
-  if (!items.length) return "";
-  return `<div class="cs-sticky-row">${items.map((i) =>
-    `<div class="sticky ${i.cls}"><div class="k">${escapeHtml(i.k)}</div><div class="b">${escapeHtml(i.b)}</div></div>`
-  ).join("")}</div>`;
-}
-
 function quoteMarkup(meta) {
   if (!meta.testimonial) return "";
   const by = meta.testimonial_by ? `<div class="by">— ${escapeHtml(meta.testimonial_by)}</div>` : "";
@@ -311,26 +299,12 @@ async function renderCaseStudy(rootEl) {
     .join("");
 
   const hasBody = body && body.trim().length > 0;
-  const sticky = stickyRowMarkup(meta);
   let bodyHtml;
   if (hasBody) {
-    let prose = renderMarkdown(body);
-    if (sticky) {
-      // drop the sticky row inside the first section (Context), above the
-      // context image: before the first figure or the second <h2…>,
-      // whichever comes first; fall back to the end.
-      const h2s = [...prose.matchAll(/<h2[\s>]/g)];
-      const fig = prose.search(/<div class="ph md-figure"/);
-      const candidates = [
-        h2s.length >= 2 ? h2s[1].index : -1,
-        fig,
-      ].filter((n) => n >= 0);
-      const pos = candidates.length ? Math.min(...candidates) : prose.length;
-      prose = prose.slice(0, pos) + sticky + prose.slice(pos);
-    }
+    const prose = renderMarkdown(body);
     bodyHtml = `<div class="cs-prose">${prose}</div>`;
   } else {
-    bodyHtml = `${sticky}<div class="cs-notice">✏️ This case study is currently being written. Full write-up, visuals, and outcomes are coming soon — the structure and details below will be filled in.</div>`;
+    bodyHtml = `<div class="cs-notice">✏️ This case study is currently being written. Full write-up, visuals, and outcomes are coming soon — the structure and details below will be filled in.</div>`;
   }
 
   // prev / next from manifest order (wrap-around)

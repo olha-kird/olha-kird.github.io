@@ -1,7 +1,7 @@
 ---
 title: "Research-based redesign rated 9/10 by the community"
 summary: "Improving the UX of a productivity and gamification tool for writers."
-tags: [B2C, UX research, Productivity, Gamification, 2021]
+tags: [B2C, UX research, Productivity, Gamification]
 year: 2021
 cover: images/writing-dashboard.png
 color: E6E6E6

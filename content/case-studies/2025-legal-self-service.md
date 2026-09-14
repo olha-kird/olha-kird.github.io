@@ -1,7 +1,7 @@
 ---
 title: "60% reduced time to first call with law firms"
 summary: "Introducing self-service onboarding features to address bottlenecks in the CS process."
-tags: [B2B, Legal tech, Startup, 2025]
+tags: [B2B, Legal tech, Startup]
 year: 2025
 cover: images/legal-document-template.png
 color: F3E8FF

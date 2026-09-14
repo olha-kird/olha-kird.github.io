@@ -1,7 +1,7 @@
 ---
-title: "0 → 1 design of a weather monitoring SaaS"
-summary: "Building a new product for the existing API of a weather intelligence company with a 50K customer base."
-tags: [B2B, 0 → 1, MVP, UI redesign, 2023 → 2026]
+title: "MVP design of a weather monitoring SaaS"
+summary: "Building a new product for the existing API of a weather intelligence company with a 50K+ customer base."
+tags: [B2B, 0 → 1, MVP, UI redesign]
 year: "2023 → 2026 redesign"
 cover: images/weather-cover.png
 color: DBEAFE
