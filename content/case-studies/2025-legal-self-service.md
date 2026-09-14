@@ -1,10 +1,10 @@
 ---
-title: "Self-Service Document and Questionnaire Builders"
-summary: "60% reduction in time to first call by addressing the bottlenecks in the CS process."
+title: "60% reduced time to first call with law firms"
+summary: "Introducing self-service onboarding features to address bottlenecks in the CS process."
 tags: [B2B, Legal tech, Startup, 2025]
 year: 2025
 cover: images/legal-document-template.png
-gradient: 2
+color: F3E8FF
 testimonial: "Olha showed great ability to quickly understand the customer's processes and presented them in an easy to understand and extendable way. Because I'm a huge fan of iteration I value that a lot."
 testimonial_by: "Product Manager, feedback after design presentation"
 ---

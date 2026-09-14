@@ -1,10 +1,10 @@
 ---
-title: "Writing Gamification Platform"
-summary: "Research-based UX redesign of a B2C productivity tool for writers, received 9/10 feedback from the community."
+title: "Research-based redesign rated 9/10 by the community"
+summary: "Improving the UX of a productivity and gamification tool for writers."
 tags: [B2C, UX research, Productivity, Gamification, 2021]
 year: 2021
-gradient: 5
 cover: images/writing-dashboard.png
+color: E6E6E6
 testimonial: "The results so far have been fantastic! We shared a preview of our work with our community and even drastic changes got ratings of 9/10 and higher."
 testimonial_by: "Founder, quote from the agency review"
 ---
@@ -56,6 +56,9 @@ One of the client’s concerns was that the system was very fragmented. Gaming a
 This change was included in a user testing scenario and received a warm welcome from the audience. It helped tie the product together and simplify the primary user flows.
 
 ![[writing-command-center.png]]
+
+As a result, even conservative users appreciated the new command center and shared their opinions on the community forum:
+> I actually really like the redesign now. It took me a while to settle my frustration over some things ... but the quick menu on the top right is such a good trade off and has saved me a ton of time now ... Suddenly I'm finishing quests again.
 
 ## Outcome
 ### Passed the test of time

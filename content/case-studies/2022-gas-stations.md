@@ -1,10 +1,10 @@
 ---
-title: Gas Station Maintenance
-summary: "Simplifying workflows and improving usability of a 20-year-old report management system serving 5000+ gas stations."
+title: "Simplified workflows for a 20-year-old maintenance system"
+summary: "Improving usability of an asset management system serving 5,000+ gas stations."
 tags: [B2B, UX research, UI redesign, 2022 → 2026]
 year: "2022 → 2026 redesign"
-gradient: 4
 cover: images/reports-kanban-ui-cover.png
+color: FBE6C4
 testimonial: "We were able to reduce the number of steps necessary to complete the tasks our users perform most while also increasing the visibility of those tasks in such a way that errors and missteps were reduced."
 testimonial_by: "Head of Product Innovation, quote from the agency review"
 ---
@@ -12,7 +12,7 @@ testimonial_by: "Head of Product Innovation, quote from the agency review"
 ## Context
 ### UX in the need of maintenance
 
-This project was a redesign of a 20-year-old B2B report management system used primarily by gas stations to keep track of their equipment and perform required maintenance. My goal was to reduce complexity and support the customizable workflows of different user types across 5000+ stations.
+This project was a redesign of a 20-year-old B2B asset management system used primarily by gas stations to keep track of their equipment and perform required maintenance. My goal was to reduce complexity and support the customizable workflows of different user types across 5,000+ stations.
 
 As a UX designer at an agency, I was fully responsible for UX research, wireframing, prototyping, and communication with the client. My main deliverable was a UX prototype, the UI was redesigned in 2026 for this case study.
 
