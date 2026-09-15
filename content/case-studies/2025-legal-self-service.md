@@ -1,5 +1,5 @@
 ---
-title: "60% reduced time to first CS call"
+title: "60% reduced time to first onboarding call with law firms"
 summary: "Introducing self-service features to speed up law firm onboarding and decrease the CS workload."
 tags: [B2B, Legal tech, Startup]
 year: 2025

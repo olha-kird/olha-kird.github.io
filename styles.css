@@ -869,6 +869,7 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
   a.case-card p { font-size: var(--text-sm); line-height: var(--lh-snug); }
 }
 @media (max-width: 820px) {
+  :root { --text-lg: 16px; }
   .cs-cover .ph { height: 320px; }
   .nav-links { display: none; }
   .menu-btn { display: flex; }
@@ -876,7 +877,9 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
   .cs-hero h1 { font-size: clamp(32px, 5vw, 64px); }
   .cs-prose h2 { font-size: var(--text-sm); }
   .cs-prose h3 { font-size: var(--text-2xl); }
-  .hero h1 { font-size: clamp(36px, 6vw, 76px); }
+  .hero h1 { font-size: clamp(44px, 8vw, 76px); }
+  .hero .stats .big { font-size: 28px; }
+  .lead-break { display: none; }
   .sec-title { font-size: var(--text-4xl); }
   .contact-card h2 { font-size: clamp(30px, 4vw, 54px); }
   .legal h2 { font-size: var(--text-xl); }
