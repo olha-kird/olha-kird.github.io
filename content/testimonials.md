@@ -1,6 +1,6 @@
 ---
 items:
-  - quote: "I really enjoyed working with Olha. ==She really tends to understand the problem we're trying to solve==. She would always come up with few solutions and talk to engineers and try to understand which one would fit not only the product but the technical solution as well. She's always ready for a compromise, brainstorm, innovate and find the best solution for the given circumstances. Very practical, easily going and excellent communication."
+  - quote: "I really enjoyed working with Olha. ==She really tends to understand the problem we’re trying to solve==. She would always come up with few solutions and talk to engineers and try to understand which one would fit not only the product but the technical solution as well. She’s always ready for a compromise, brainstorm, innovate and find the best solution for the given circumstances. Very practical, easily going and excellent communication."
     name: "Aleksandar B."
     avatar: images/testimonials/Aleksandar.png
     role: "Technical Lead"
@@ -12,7 +12,7 @@ items:
     name: "Megan B."
     avatar: images/testimonials/Megan.png
     role: "Senior UI Designer"
-  - quote: "Olha's talents in UX design are undeniable, and her self-organization and keen attention to detail are genuinely inspiring. Every project with Olha felt more like an exciting collaboration, and ==her innovative solutions always left our clients in awe==. What elevates Olha further is her exceptional communication skills. She doesn't just address tasks — she thinks ahead, anticipates challenges, and often presents refreshingly non-conventional solutions."
+  - quote: "Olha’s talents in UX design are undeniable, and her self-organization and keen attention to detail are genuinely inspiring. Every project with Olha felt more like an exciting collaboration, and ==her innovative solutions always left our clients in awe==. What elevates Olha further is her exceptional communication skills. She doesn’t just address tasks — she thinks ahead, anticipates challenges, and often presents refreshingly non-conventional solutions."
     name: "Yevhen S."
     avatar: images/testimonials/Yevhen.png
     role: "Project Manager"
