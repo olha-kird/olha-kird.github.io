@@ -6,7 +6,7 @@ items:
     role: "Technical Lead"
   - quote: "In every aspect of her work, ==Olha consistently exceeded our high expectations==. What impressed me most was her passion for creating products that users love, her flexibility and versatility in handling her wide-ranging responsibilities, and her structured, principled approach to her work. Olha’s excellent communication skills and her positive, kind demeanor were also key factors in her effectiveness and in the collaborative spirit of our team."
     name: "Frederik W."
-    avatar: images/testimonials/Frederik.png
+    avatar: images/testimonials/Frederic.png
     role: "Founding AI/ML Lead"
   - quote: "Olha has an ==incredible ability to simplify complex concepts== and transform them into user-friendly experiences, demonstrating a keen eye for detail and creativity. Her strong communication skills and collaborative spirit make her an asset for any team. She is a fantastic team player, always ready to share insights and ideas to enhance the project. Olha’s warm and positive personality fosters a friendly and productive working environment."
     name: "Megan B."
