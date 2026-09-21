@@ -281,6 +281,45 @@ async function renderProcess(trackEl) {
   observeReveals(trackEl);
 }
 
+/* ==phrase== inside a quote becomes a marker highlight. */
+function highlightMarkup(text) {
+  return escapeHtml(text).replace(/==(.+?)==/g, "<mark>$1</mark>");
+}
+
+/* ── Homepage: testimonials ── */
+async function renderTestimonials(gridEl) {
+  let meta;
+  try { ({ meta } = parseFrontmatter(await (await fetch("content/testimonials.md")).text())); }
+  catch (e) { console.error("Could not load testimonials:", e); return; }
+
+  const items = (meta.items || []).filter((t) => t && t.quote);
+  if (!items.length) { gridEl.closest("section").hidden = true; return; }
+
+  gridEl.innerHTML = items.map((t) => {
+    const name = escapeHtml(t.name || "");
+    const nameHtml = t.linkedin
+      ? `<a href="${escapeHtml(t.linkedin)}" target="_blank" rel="noopener">${name}</a>`
+      : name;
+    const avatar = t.avatar
+      ? `<img class="t-avatar" src="${escapeHtml(t.avatar)}" alt="" width="48" height="48" loading="lazy" decoding="async" />`
+      : "";
+    return `
+      <figure class="t-card reveal">
+        <span class="pin"></span>
+        <figcaption>
+          ${avatar}
+          <span class="t-who">
+            <span class="t-name">${nameHtml}</span>
+            <span class="t-role">${escapeHtml(t.role || "")}</span>
+          </span>
+        </figcaption>
+        <blockquote><p>${highlightMarkup(t.quote)}</p></blockquote>
+      </figure>`;
+  }).join("");
+
+  observeReveals(gridEl);
+}
+
 /* ── Case study page ── */
 function quoteMarkup(meta) {
   if (!meta.testimonial) return "";
@@ -640,6 +679,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const processTrack = document.getElementById("process-track");
   if (processTrack) await renderProcess(processTrack);
+
+  const testimonialGrid = document.getElementById("testimonial-grid");
+  if (testimonialGrid) await renderTestimonials(testimonialGrid);
 
   const cs = document.getElementById("case-study-root");
   if (cs) await renderCaseStudy(cs);
