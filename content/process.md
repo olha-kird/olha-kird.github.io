@@ -1,24 +1,21 @@
 ---
 steps:
-  - title: Discover
+  - title: Understand the problem
     icon: file-search
     items:
-      - Understand the problem
-      - Define success metrics
-      - Conduct necessary research
-      - Ideate and run workshops
-  - title: Prototype
+      - Conduct generative research
+      - Turn findings into insights
+      - Define user flows and IA
+  - title: Prototype in code
     icon: click
     items:
-      - Define user flows and IA
-      - Draft in Figma, prototype in code
+      - Draft in Figma, prototype in Claude Code
       - Align with the team and stakeholders
       - Test with users and iterate
-  - title: Deliver
+  - title: Deliver measurable impact
     icon: ship
     items:
-      - Hand off to engineering
-      - Ship and validate in production
-      - Document decisions
-      - Update design system
+      - Collaborate with engineering
+      - Validate implementation
+      - Ship and measure success
 ---
