@@ -33,11 +33,9 @@ The system is highly customizable and allows users to create custom weather defi
 
 ![[weather-definition.png]]
 
-The weather definitions can be combined with locations and notifications to create an alert which will be triggered if a matching weather event is forecasted.
+The weather definitions can be combined with locations and notifications to create an alert which will be triggered if a matching weather event is forecasted. The prototype was validated through internal testing and detailed client feedback.
 
 ![[weather-alerts.png]]
-
-The prototype was validated through internal testing and detailed client feedback.
 
 ## Outcome
 ### Scalable MVP ready for development
