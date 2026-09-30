@@ -18,7 +18,7 @@ The client has not agreed to user interviews, so instead I used their domain kno
 
 After gathering the initial requirements, I defined the information architecture and built a user flow that helped me prioritize features and lay a foundation for the wireframes. Users can set up alerts to get notified about extreme weather at selected locations. I used a top-down approach for the alert setup, so users can create all necessary data objects during the workflow without interruptions.
 
-![[weather-flow.png]]
+![[weather-flow.png | User flow for creating a weather alert: select a location, select a weather definition, configure notifications and recipients, with branches for adding a new location, definition or contact]]
 
 ## Solution
 ### Weather events at a glance
@@ -26,16 +26,16 @@ The core element of the system is the timeline. It allows users to see an overvi
 
 To make design decisions easy to discuss and iterate on, I created a highly detailed Figma prototype showcasing all interactions. The client then presented it to their team and used it as the basis for feedback. I used the smart animate feature in Figma to visualize how the weather events move as users interact with the timeline.
 
-![[weather-interaction.gif]]
+![[weather-interaction.gif | Animated prototype of the timeline view for one location, showing weather events of different severity across the day and a scrollable date bar]]
 
 ### Advanced customization
 The system is highly customizable and allows users to create custom weather definitions depending on their needs. They can build complex conditions to define which weather events are relevant for them.
 
-![[weather-definition.png]]
+![[weather-definition.png | Form for a new weather definition with a title, severity, a readable preview of the conditions, and groups of parameters such as surface temperature and wind speed joined with logical operators]]
 
 The weather definitions can be combined with locations and notifications to create an alert which will be triggered if a matching weather event is forecasted. The prototype was validated through internal testing and detailed client feedback.
 
-![[weather-alerts.png]]
+![[weather-alerts.png | Alerts screen with a location tree on the left and a grid of alert cards grouped by date, each showing a weather map, event name, severity and location]]
 
 ## Outcome
 ### Scalable MVP ready for development

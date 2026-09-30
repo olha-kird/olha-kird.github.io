@@ -75,9 +75,12 @@ def replace_obsidian_embeds(text):
                     "</div></div>\n"
                 )
 
-        src = resolve_embed_src(inner)
-        label = re.sub(r"\.[a-z0-9]+$", "", re.sub(r"^.*/", "", inner), flags=re.I).strip()
-        return (f'\n<img class="md-embed" src="{escape(src)}" alt="{escape(label)}" '
+        # ![[file.png | describe the image]] -> alt text; without it the file name is used
+        name, _, alt = inner.partition("|")
+        name, alt = name.strip(), alt.strip()
+        src = resolve_embed_src(name)
+        label = re.sub(r"\.[a-z0-9]+$", "", re.sub(r"^.*/", "", name), flags=re.I).strip()
+        return (f'\n<img class="md-embed" src="{escape(src)}" alt="{escape(alt or label)}" '
                 f'data-label="{escape(label)}" loading="lazy" decoding="async" />\n')
 
     return re.sub(r"!\[\[([^\]]+)\]\]", sub, text)

@@ -29,11 +29,11 @@ The questionnaires were the most challenging part of the design. They are used t
 
 The previous version on the admin side was initially implemented without design input, so it had no proper navigation between sections and questions. In the new version, I introduced an overview in the sidebar, and refined the ability for users to connect fields to each question to make sure that all data is saved correctly in the system.
 
-![[legal-questionnaire.png]]
+![[legal-questionnaire.png | Questionnaire editor with a sidebar of sections and questions, and a question form with title, help text, input type and answer options with logic jumps]]
 
 Users can also generate questionnaires with AI to have a starting point instead of a blank page. Currently, this feature is limited to creating new questionnaires from scratch, but the next steps would involve live updates through the AI chat and pre-made templates for most common cases.
 
-![[legal-questionnaire-generate.png]]
+![[legal-questionnaire-generate.png | Dialog for generating a questionnaire with AI by uploading a PDF document with drag-and-drop]]
 
 ### Prepare documents to sign
 
@@ -41,7 +41,7 @@ Document templates are used primarily to request signatures from clients before 
 
 The templates mostly follow the same logic as questionnaires with one key difference. They also support connected fields, but in reverse — the data that is already in the system will flow into the document to avoid filling it manually.
 
-![[legal-document-template.png]]
+![[legal-document-template.png | Document template editor with a PDF page, fields such as name, address and signature placed on it, and a properties panel for the selected field]]
 
 ## Outcome
 ### 60% less time to the first call

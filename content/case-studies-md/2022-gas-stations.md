@@ -22,11 +22,11 @@ My first step was an in-depth stakeholder interview. I talked to the CEO, produc
 
 Then, I reviewed the existing system and had additional calls with the team to discuss the current implementation details. This helped me clarify the relationships between different entities and, as a result, build an object-oriented diagram of information architecture.
 
-![[reports-ia.png]]
+![[reports-ia.png | Information architecture diagram showing how objects, equipment, inspections, reports, faults, documents and damage claims relate to each other]]
 
 The next step was to conduct user interviews and understand the relevant workflows. After talking to users, I identified insights from conversations and used thematic analysis to group them into categories. This helped me define priorities for the redesign and build a high-level user flow to reflect the actions of users in the system.
 
-![[reports-flow.png]]
+![[reports-flow.png | User flow diagram in three lanes: the inspector runs an inspection and creates a report, the technician processes it and requests offers, and the supplier estimates, does the work and invoices]]
 
 Based on the insights from the interviews, users had been using the system for many years, so it was important to keep things in predictable places. At the same time, there was a lack of consistency across different screens, so there was still a need for significant changes. Finding the right balance was one of the main challenges of the redesign.
 
@@ -35,11 +35,11 @@ Based on the insights from the interviews, users had been using the system for m
 
 While analyzing the information architecture, I realized it contained a very similar entity to a support ticket. This gave me the idea to reuse a pattern from task management systems and introduce a Kanban board. This layout would improve usability for users who process lots of tickets and update their statuses.
 
-![[reports-kanban-ui.png]]
+![[reports-kanban-ui.png | Reports screen as a Kanban board with columns for new reports, in progress, work done and closed, and an action menu open on one card]]
 
 Although the client liked the Kanban view at first, it was eventually rejected. The reason was that all statuses were customizable, and not all customer workflows were linear, so it didn’t make sense to visualize them this way. As a result, we decided to stick with the table view.
 
-![[reports-table-ui.png]]
+![[reports-table-ui.png | Reports screen as a table with nested parent and child reports, and a status dropdown open on one row]]
 
 While keeping the original layout, I introduced some UX changes to improve usability and added useful shortcuts for power users who spend most of their time processing reports:
 
@@ -53,7 +53,7 @@ The most challenging part of the system was the report creation flow. Previously
 
 After reviewing the information architecture, I was able to simplify the flow by collapsing three different steps into one and then split the form into two pages. This way, I put the required information upfront while moving the optional details to the second page.
 
-![[reports-new-ui-filled.png]]
+![[reports-new-ui-filled.png | First step of the new report form: report details, a file upload area, and a step-by-step selection of object, report type, equipment and fault]]
 
 Revisiting the project in 2026, this layout could open an opportunity to pre-fill the report with AI using data from the uploaded documents. This wasn't feasible when the project was first designed, but could save even more time for the users when creating reports.
 

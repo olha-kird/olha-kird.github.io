@@ -12,7 +12,7 @@ testimonial_by: "Co-founder of monobank, quote from the acquisition announcement
 ### Pivot from B2C to B2B
 One day, a university friend approached me with a suggestion to help him design a mobile application for customers to book tables in restaurants. Soon, with a small team of friends, we designed and developed a beautiful iOS application where users could search for restaurants and select a specific table to book... But no restaurant wanted to be on the platform.
 
-![[restaurants-mobile.png]]
+![[restaurants-mobile.png | Five screens of the mobile app for restaurant guests, in Ukrainian: restaurant list with a map, restaurant page, reviews, booking form and current bookings]]
 
 That was the moment we realized that we should have at least talked to the restaurant owners first. After a few conversations, we discovered that they didn't want to allow customers to choose a table by themselves. However, we also discovered that the table management process was a mess. And so we found an opportunity to fix it.
 
@@ -21,7 +21,7 @@ That was the moment we realized that we should have at least talked to the resta
 
 I was working together with another founding designer, but conveniently we had different design expertise: I was responsible for the UX and UI, while she focused on the graphic design. So we did some tasks together, but my main responsibility was to draft new product screens and maintain the component library in Figma.
 
-![[restaurants-components.png]]
+![[restaurants-components.png | Design system sheet with typography, icons, colors, form fields, buttons, toggles, chips, navigation menus and booking cards]]
 
 ## Solution
 ### Designing for the floor: a touch-first booking timeline
@@ -30,8 +30,9 @@ The platform consisted of several products for different types of users. I mostl
 
 The main challenge was designing for the fast-paced restaurant environment — waiters needed to complete actions in a few taps and low precision. So it was essential to make the UX simple and intuitive.
 
-![[restaurants-timeline.png]]
-![[restaurants-booking.png]]
+![[restaurants-timeline.png | Web app for restaurant staff, in Ukrainian: a list of new bookings on the left and a timeline of tables by time on the right, with bookings as draggable blocks]]
+
+![[restaurants-booking.png | Three states of the new booking dialog, in Ukrainian: recent calls, matching guests while typing a name, and an existing guest's call and booking history]]
 
 Since we started the project in 2020, a significant challenge was the lockdown. It was not easy to test the solution we offered, but we still managed to perform some live usability testing and see the product in action.
 

@@ -22,11 +22,11 @@ Next, I moved to the user research, which included **5 interviews** and **2 surv
 
 The first survey was focused on learning about the audience, their habits and motivations. The second one covered the usage of the platform itself. An interesting finding was that writers, unsurprisingly, really like to use the "Other" option in surveys, which led to a longer processing time of the responses. In the second survey, I cut the open-ended options in multiple choice questions to keep the data quantitative.
 
-![[writing-surveys.png]]
+![[writing-surveys.png | Two survey forms used in the research: questions about forum and avatar habits, and questions about how writers interact with monsters and quests]]
 
 Finally, I reviewed the analytics, paying the most attention to the user pathways. This allowed me to check the self-reported data from the interviews and surveys to refine the user flow.
 
-![[writing-flow.png]]
+![[writing-flow.png | User flow of a writing session: check active quests, fill the battle list with monsters, then open or create a file and start a monster battle to write]]
 
 After completing the research stage, I analyzed the findings and defined several priority issues for the redesign. Then, I started building the updated prototype module by module. Every part of the process was discussed with the client and updated according to the feedback. For the priority modules, I also conducted unmoderated user testing with the interactive UX prototypes in Figma and gathered feedback from the users in a qualitative survey.
 
@@ -35,13 +35,13 @@ After completing the research stage, I analyzed the findings and defined several
 
 One of the main business goals for the client was to improve retention. New users didn’t know where to start and what to do. To improve the situation, I suggested adding interactive onboarding for new users. The main idea was to engage them in a short battle with a monster and give rewards for it. This would show the basics of the game and give users a feeling of accomplishment, making them more likely to stay.
 
-![[writing-onboarding.png]]
+![[writing-onboarding.png | Four-step onboarding wireframe: welcome message, first monster introduction, a battle screen with text editor and word counter, reward screen]]
 
 ### Helping users navigate the system
 
 Another product issue was the lack of a starting page. Previously, the users always landed on the writing page after logging in. However, the quantitative data from surveys and analytics showed that users typically don’t start writing immediately. They usually check their quests, select monsters to battle, and only then get to writing. To support this behavior, I added a customizable dashboard featuring stats and links to other pages.
 
-![[writing-dashboard.png]]
+![[writing-dashboard.png | Wireframe of the new dashboard with a welcome header and daily stats. Widgets for profile, quests, recent files and monsters]]
 
 ### Decreasing usage of competitor software
 
@@ -49,8 +49,9 @@ Based on the surveys and user interviews, many users typed their text into anoth
 
 Previously, the system had two separate pages for files and projects. However, during the user research, I discovered that users mostly had just one or two projects for their files. Based on that knowledge, I decided to combine the two pages. I used patterns from competitor research to build a layout that would allow users to organize and navigate their files better.
 
-![[writing-overview.png]]
-![[writing-editor.png]]
+![[writing-overview.png | Wireframe of the combined files and projects page with a project tree in the sidebar and a grid of project and file cards]]
+
+![[writing-editor.png | Wireframe of the text editor with a file title, tags, a word counter and a bar showing the battle list with a Start Battle button]]
 
 ### Bringing core features together
 
@@ -58,7 +59,7 @@ One of the client’s concerns was that the system was very fragmented. Gaming a
 
 This change was included in a user testing scenario and received a warm welcome from the audience. It helped tie the product together and simplify the primary user flows.
 
-![[writing-command-center.png]]
+![[writing-command-center.png | Wireframes of the Command Center overlay with three tabs: monsters in the battle list, quests with progress, and recent or favorite files]]
 
 As a result, even conservative users appreciated the new command center and shared their opinions on the community forum:
 > I actually really like the redesign now. It took me a while to settle my frustration over some things ... but the quick menu on the top right is such a good trade off and has saved me a ton of time now ... Suddenly I'm finishing quests again.
