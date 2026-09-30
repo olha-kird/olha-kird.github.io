@@ -1,13 +1,14 @@
 /* ───────────────────────────────────────────────
-   Shared site logic: load markdown content, render
-   homepage work cards + case study pages in the
-   handcrafted-paper design.
-   Content pipeline is unchanged — markdown files in
-   content/case-studies/ + content/manifest.json,
-   parsed with js-yaml, rendered with marked.
+   Shared site logic: homepage work cards, shared
+   partials, and the interactive bits of the case
+   study pages (compare sliders, image fallbacks).
+   Case study pages themselves are static HTML built
+   by build.py from content/case-studies-md/*.md; the
+   homepage cards read the same frontmatter in the
+   browser (js-yaml) via content/manifest.json.
 ─────────────────────────────────────────────── */
 
-const CONTENT_DIR = "content/case-studies";
+const CONTENT_DIR = "content/case-studies-md";
 const MANIFEST_URL = "content/manifest.json";
 
 /* ── markdown helpers ── */
@@ -22,44 +23,6 @@ function parseFrontmatter(raw) {
     console.error("Frontmatter parse error:", e);
   }
   return { meta, body: (match[2] || "").trim() };
-}
-
-/* Bare names resolve to the images/ folder; paths with a slash are used as-is. */
-function resolveEmbedSrc(name) {
-  return name.includes("/") ? name : `images/${name}`;
-}
-
-/* Obsidian-style ![[file.png]] -> real <img>, with the striped paper
-   placeholder shown only when the file is missing (handled by
-   hookEmbedFallbacks after the markup is inserted).
-
-   Before/after redesign slider — opt in per image with the `compare:` prefix:
-     ![[compare: before.png | after.png]]
-   Renders a draggable vertical divider: `before` shows left of the line,
-   `after` to the right. Both images should share the same dimensions. */
-function replaceObsidianEmbeds(md) {
-  return md.replace(/!\[\[([^\]]+)\]\]/g, (_, raw) => {
-    const inner = String(raw).trim();
-
-    const cmp = inner.match(/^compare\s*:\s*(.+)$/i);
-    if (cmp) {
-      const parts = cmp[1].split("|").map((s) => s.trim()).filter(Boolean);
-      if (parts.length === 2) {
-        const [before, after] = parts;
-        return `\n<div class="md-compare" style="--pos:50%">` +
-          `<img class="cmp-img cmp-after" src="${escapeHtml(resolveEmbedSrc(after))}" alt="After redesign" draggable="false" loading="lazy" decoding="async" />` +
-          `<div class="cmp-before-wrap"><img class="cmp-img cmp-before" src="${escapeHtml(resolveEmbedSrc(before))}" alt="Before redesign" draggable="false" loading="lazy" decoding="async" /></div>` +
-          `<div class="cmp-handle" role="slider" tabindex="0" aria-label="Drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">` +
-          `<span class="cmp-line"></span>` +
-          `<span class="cmp-grip"><i class="ti ti-arrows-move-horizontal"></i></span>` +
-          `</div></div>\n`;
-      }
-    }
-
-    const src = resolveEmbedSrc(inner);
-    const label = inner.replace(/^.*\//, "").replace(/\.[a-z0-9]+$/i, "").trim();
-    return `\n<img class="md-embed" src="${escapeHtml(src)}" alt="${escapeHtml(label)}" data-label="${escapeHtml(label)}" loading="lazy" decoding="async" />\n`;
-  });
 }
 
 /* Wire up drag/keyboard interaction for each before/after slider. */
@@ -113,22 +76,6 @@ function hookEmbedFallbacks(root = document) {
   });
 }
 
-function renderMarkdown(body) {
-  return marked.parse(replaceObsidianEmbeds(body));
-}
-
-/* Stable heading IDs: `## Title {#my-id}` → <h2 id="my-id">Title</h2>.
-   Lets analytics track a section by a fixed id even if its visible text is reworded.
-   Optional per heading; unmarked headings are unaffected. */
-function applyHeadingIds(root) {
-  root.querySelectorAll(".cs-prose h2, .cs-prose h3").forEach((h) => {
-    const m = h.textContent.match(/\s*\{#([a-z0-9-]+)\}\s*$/i);
-    if (!m) return;
-    h.id = m[1];
-    h.textContent = h.textContent.slice(0, m.index).replace(/\s+$/, "");
-  });
-}
-
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, (c) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
@@ -139,6 +86,11 @@ async function fetchStudy(slug) {
   const res = await fetch(`${CONTENT_DIR}/${slug}.md`);
   if (!res.ok) throw new Error(`Failed to load ${slug} (${res.status})`);
   return parseFrontmatter(await res.text());
+}
+
+/* 2022-gas-stations -> gas-stations (same rule as build.py; GitHub Pages serves gas-stations.html at that URL). */
+function casePageUrl(slug) {
+  return slug.replace(/^\d{4}-/, "");
 }
 
 /* A cover area: real <img> if frontmatter has `cover`, else striped placeholder.
@@ -211,12 +163,12 @@ async function renderWork(featureEl, gridEl) {
   if (!studies.length) return;
 
   const card = (s) => {
-    const href = `case-study.html?id=${encodeURIComponent(s.slug)}`;
+    const href = casePageUrl(s.slug);
     const tags = (s.meta.tags || [])
       .map((t) => `<span class="chip">${escapeHtml(t)}</span>`)
       .join("");
     return `
-      <a href="${href}" id="case-${escapeHtml(s.slug)}" class="case-card reveal">
+      <a href="${href}" id="case-${escapeHtml(casePageUrl(s.slug))}" class="case-card reveal">
         ${coverMarkup(s.meta, "cover", s.meta.industry || "cover coming soon")}
         <div class="cc-body">
           <span class="yr">${escapeHtml(String(s.meta.year || ""))}</span>
@@ -321,109 +273,29 @@ async function renderTestimonials(gridEl) {
 }
 
 /* ── Case study page ── */
-function quoteMarkup(meta) {
-  if (!meta.testimonial) return "";
-  const by = meta.testimonial_by ? `<div class="by">— ${escapeHtml(meta.testimonial_by)}</div>` : "";
-  return `<div class="cs-quote"><p>${escapeHtml(meta.testimonial)}</p>${by}</div>`;
-}
-
-async function renderCaseStudy(rootEl) {
-  const slug = new URLSearchParams(window.location.search).get("id");
-  if (!slug) { rootEl.innerHTML = notFoundMarkup("No case study specified."); return; }
-
-  // manifest gives us prev/next ordering
-  let slugs = [];
-  try { slugs = await (await fetch(MANIFEST_URL)).json(); } catch (e) { /* non-fatal */ }
-
-  let meta, body;
-  try { ({ meta, body } = await fetchStudy(slug)); }
-  catch (e) { console.error(e); rootEl.innerHTML = notFoundMarkup("That case study could not be found."); return; }
-
-  document.title = `${meta.title || "Case study"} — Olha Kirdiaieva`;
-
-  const tags = (meta.tags || [])
-    .map((t) => `<span class="chip" style="font-size:12px;padding:5px 11px">${escapeHtml(t)}</span>`)
-    .join("");
-
-  const hasBody = body && body.trim().length > 0;
-  let bodyHtml;
-  if (hasBody) {
-    const prose = renderMarkdown(body);
-    bodyHtml = `<div class="cs-prose">${prose}</div>`;
-  } else {
-    bodyHtml = `<div class="cs-notice">✏️ This case study is currently being written. Full write-up, visuals, and outcomes are coming soon — the structure and details below will be filled in.</div>`;
-  }
-
-  // prev / next from manifest order (wrap-around)
-  let nav = "";
-  const idx = slugs.indexOf(slug);
-  if (idx !== -1 && slugs.length > 1) {
-    const total = slugs.length;
-    const prevIdx = (idx - 1 + total) % total;
-    const nextIdx = (idx + 1) % total;
-    const prevSlug = slugs[prevIdx];
-    const nextSlug = slugs[nextIdx];
-    nav = `
-      <div class="cs-next">
-        <a href="case-study.html?id=${encodeURIComponent(prevSlug)}" class="btn btn-ghost prev">
-          <i class="ti ti-arrow-left"></i> <span class="cs-label">Previous<span class="cs-word"> case</span></span> <span class="cs-count">${prevIdx + 1}/${total}</span>
-        </a>
-        <a href="case-study.html?id=${encodeURIComponent(nextSlug)}" class="btn btn-ghost next">
-          <span class="cs-count">${nextIdx + 1}/${total}</span> <span class="cs-label">Next<span class="cs-word"> case</span></span> <i class="ti ti-arrow-right"></i>
-        </a>
-      </div>`;
-  }
-
-  rootEl.innerHTML = `
-    <section class="cs-hero">
-      <div class="wrap">
-        <a class="back-link" href="index.html#case-${encodeURIComponent(slug)}"><i class="ti ti-arrow-left"></i> All work</a>
-        <div class="case-tags">${tags}</div>
-        <h1>${escapeHtml(meta.title || slug)}</h1>
-        ${meta.summary ? `<p class="lead">${escapeHtml(meta.summary)}</p>` : ""}
-      </div>
-    </section>
-
-    <div class="wrap cs-cover">
-      ${coverMarkup(meta, "", "hero shot — product UI", true)}
-    </div>
-
-    <div class="wrap">
-      <div class="cs-body">
-        ${bodyHtml}
-        ${quoteMarkup(meta)}
-        ${nav}
-      </div>
-    </div>`;
-
+/* The page is static HTML (build.py); this only wires up the interactive parts. */
+function initCaseStudy(rootEl) {
   hookEmbedFallbacks(rootEl);
   initCompare(rootEl);
-  applyHeadingIds(rootEl);
 
   // Signal that the case study DOM is ready (js/analytics.js listens to track engagement).
-  document.dispatchEvent(new CustomEvent("casestudy:rendered", { detail: { slug } }));
-}
-
-function notFoundMarkup(message) {
-  return `
-    <section class="cs-hero">
-      <div class="wrap">
-        <a class="back-link" href="index.html#cases"><i class="ti ti-arrow-left"></i> All work</a>
-        <h1>Case study not found</h1>
-        <p class="lead">${escapeHtml(message)}</p>
-        <p style="margin-top:28px"><a class="btn btn-primary" href="index.html#cases"><i class="ti ti-arrow-left"></i> Back to all work</a></p>
-      </div>
-    </section>`;
+  document.dispatchEvent(new CustomEvent("casestudy:rendered", { detail: { slug: rootEl.dataset.slug } }));
 }
 
 /* ── HTML partial includes (shared header / contact components) ──
    <div data-include="partials/header.html"></div> is replaced by the file's
-   contents. On the home page, index.html#… links are rewritten to #… so
+   contents. On the home page, ./#… links are rewritten to #… so
    in-page smooth-scroll keeps working. */
 // Home = the site root or index.html. Other standalone pages (case study, legal
-// pages) keep their full "index.html#…" links so those navigate back to the home
+// pages) keep their full "./#…" links so those navigate back to the home
 // page instead of being rewritten to same-page anchors that don't exist there.
 const ON_HOME = /(^|\/)(index\.html)?$/.test(window.location.pathname);
+
+// /index.html and / are the same page; show the shorter address. (GitHub Pages
+// can't redirect, so the address is rewritten in place — no reload.)
+if (/(^|\/)index\.html$/.test(window.location.pathname)) {
+  history.replaceState(null, "", window.location.pathname.replace(/index\.html$/, "") + window.location.search + window.location.hash);
+}
 
 async function applyIncludes() {
   const slots = [...document.querySelectorAll("[data-include]")];
@@ -435,8 +307,8 @@ async function applyIncludes() {
         const tpl = document.createElement("template");
         tpl.innerHTML = html.trim();
         if (ON_HOME) {
-          tpl.content.querySelectorAll('a[href^="index.html#"]').forEach((a) => {
-            a.setAttribute("href", a.getAttribute("href").slice("index.html".length));
+          tpl.content.querySelectorAll('a[href^="./#"]').forEach((a) => {
+            a.setAttribute("href", a.getAttribute("href").slice(2));
           });
         }
         slot.replaceWith(tpl.content);
@@ -531,11 +403,21 @@ function initChrome() {
 
   initCardTilt();
 
-  // If an "index.html#section" link points at a section that exists on THIS
+  // Logo → "./" (clean URL). Already on the home page, that would reload it,
+  // so scroll to the top instead.
+  const brand = document.querySelector(".site-header .brand");
+  if (brand && ON_HOME) {
+    brand.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  // If a "./#section" link points at a section that exists on THIS
   // page (e.g. #contact on a case study), rewrite it to an in-page anchor so it
   // smooth-scrolls instead of navigating to the home page.
-  document.querySelectorAll('a[href^="index.html#"]').forEach((a) => {
-    const hash = a.getAttribute("href").slice("index.html".length);
+  document.querySelectorAll('a[href^="./#"]').forEach((a) => {
+    const hash = a.getAttribute("href").slice(2);
     if (hash.length > 1 && document.getElementById(hash.slice(1))) {
       a.setAttribute("href", hash);
     }
@@ -584,7 +466,7 @@ function initCardTilt() {
   });
 }
 
-/* Arriving at e.g. index.html#contact from another page: the browser's native
+/* Arriving at e.g. /#contact from another page: the browser's native
    hash jump fired before applyIncludes() injected the contact section, so it
    landed at the top. Now that the partials exist, jump to the target (with the
    same sticky-header offset the in-page anchor clicks use). */
@@ -612,6 +494,11 @@ function scrollToInitialHash() {
   // text above the target) can't leave us short; the fonts.ready hook catches
   // anything slower still.
   jump();
+  // Arriving on the home page from another page (header nav, "All work"): hide
+  // the #hash right after the first jump so the address bar shows a clean "/".
+  // The re-align loop below works from `id`, not the URL, so it isn't affected.
+  // Home only: the legal page uses its hash (#de) for the language.
+  if (ON_HOME) history.replaceState(null, "", window.location.pathname + window.location.search);
   let tries = 0;
   const timer = setInterval(() => {
     jump();
@@ -684,7 +571,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (testimonialGrid) await renderTestimonials(testimonialGrid);
 
   const cs = document.getElementById("case-study-root");
-  if (cs) await renderCaseStudy(cs);
+  if (cs) initCaseStudy(cs);
 
   // Honor #contact etc. only after the async work cards / case body are in the
   // DOM — they change page height and would otherwise leave the target stale.

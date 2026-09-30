@@ -34,7 +34,7 @@
 
   // Tidy the address bar: strip tracking params after PostHog has captured them
   // (init() above already sent the pageview with UTMs), so visitors can copy a
-  // clean URL. Only removes known tracking keys — functional params like ?id= stay.
+  // clean URL. Only removes known tracking keys — functional params stay.
   (function cleanUrl() {
     var url = new URL(location.href);
     var dirty = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "ph_internal"];
@@ -47,11 +47,12 @@
 
   // --- Custom events ---------------------------------------------------------
 
-  // Case study viewed: fired on case-study.html, tagged with the slug from ?id=.
-  // Lets us chart which case studies get opened (autocapture only sees the URL).
-  var caseStudyId = new URLSearchParams(location.search).get("id");
-  if (location.pathname.indexOf("case-study.html") !== -1 && caseStudyId) {
-    posthog.capture("case_study_viewed", { slug: caseStudyId });
+  // Case study viewed: fired on the per-study pages (built by build.py), which carry
+  // their slug in <meta name="case-slug">. Lets us chart which case studies get opened
+  // (autocapture only sees the URL).
+  var slugMeta = document.querySelector('meta[name="case-slug"]');
+  if (slugMeta && slugMeta.content) {
+    posthog.capture("case_study_viewed", { slug: slugMeta.content });
   }
 
   // Contact intent: clicks on the email or LinkedIn links. Delegated on document
