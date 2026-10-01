@@ -135,7 +135,11 @@ function observeReveals(root = document) {
     // only make some of them arrive late.
     const sibs = [...el.parentElement.children].filter((c) => c.classList.contains("reveal"));
     const idx = el.classList.contains("case-card") ? 0 : Math.max(0, sibs.indexOf(el));
-    el.style.transitionDelay = Math.min(idx, 3) * 80 + "ms";
+    // Process steps get a wider gap so they read as arriving one by one — but
+    // not in the single-column layout (<=680px, see .process-track), where each
+    // step scrolls in on its own and a stagger would only add lag.
+    const gap = el.classList.contains("step") ? (matchMedia("(max-width: 680px)").matches ? 0 : 200) : 80;
+    el.style.transitionDelay = Math.min(idx, 3) * gap + "ms";
     revealIO.observe(el);
   });
 }
@@ -218,7 +222,7 @@ async function renderProcess(trackEl) {
   const icons = await Promise.all(steps.map((s) => (s.icon ? loadIconSvg(s.icon) : "")));
 
   trackEl.innerHTML = steps.map((s, i) => {
-    const items = (s.items || []).map((it) => `<li><span>${highlightMarkup(it).replace(/ <mark>/g, "&nbsp;<mark>")}</span></li>`).join("");
+    const items = (s.items || []).map((it) => `<li>${escapeHtml(it)}</li>`).join("");
     return `
       <div class="step reveal">
         <span class="pin"></span>

@@ -865,8 +865,7 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
 .t-card .pin { top: -7px; left: 50%; margin-left: -8px; }
 .t-card blockquote { margin: 0; }
 .t-card blockquote p { font-size: var(--text-md); line-height: var(--lh-body); color: var(--ink-soft); font-weight: 300; margin: 0; }
-.step-list mark { white-space: nowrap; }
-.t-card mark, .step-list mark {
+.t-card mark {
   color: var(--ink); padding: 0 2px; margin: 0 -2px;
   background: var(--accent-wash); border-radius: 2px;
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
