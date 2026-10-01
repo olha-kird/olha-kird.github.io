@@ -405,6 +405,20 @@ section { padding: 92px 0; }
 .hero .stats .big { font-size: var(--text-4xl); font-weight: 600; color: var(--accent); letter-spacing: var(--track-heading); line-height: 1; white-space: nowrap; }
 .hero .stats .ckr { margin-top: 10px; white-space: nowrap; }
 
+/* Load-in: the headline underline draws while the cards drop in one by one.
+   Cards use the standalone `translate` property so the inline rotate() is untouched. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero h1 .underline-mark { animation: underline-draw .8s cubic-bezier(.65,0,.35,1) 300ms both; }
+  .hero .stats .cert { animation: cert-in .7s cubic-bezier(.22,.61,.36,1) both; }
+  .hero .stats .cert:nth-child(1) { animation-delay: 300ms; }
+  .hero .stats .cert:nth-child(2) { animation-delay: 460ms; }
+  .hero .stats .cert:nth-child(3) { animation-delay: 620ms; }
+  .hero .stats .cert:nth-child(4) { animation-delay: 780ms; }
+  .hero .stats .cert:nth-child(5) { animation-delay: 940ms; }
+}
+@keyframes cert-in { from { opacity: 0; translate: 0 16px; } to { opacity: 1; translate: 0 0; } }
+@keyframes underline-draw { from { background-size: 0 3px; } to { background-size: 100% 3px; } }
+
 /* ===== Work ===== */
 /* .case-tags is used on the case-study hero (JS-injected). */
 .case-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
