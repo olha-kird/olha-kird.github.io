@@ -125,7 +125,7 @@
   --lh-tight:  1.2;    /* small headings */
 
   /* ── Letter spacing ── */
-  --track-label-lg:   0.12em;   /* 20-24px hero eyebrow */
+  --track-label-lg:   0.08em;   /* 20-24px hero eyebrow */
   --track-label:      0.10em;   /* 16px uppercase mono section kickers */
   --track-label-sm:   0.08em;   /* 14px uppercase mono captions */
   --track-quiet:      0.04em;   /* quiet mono meta (footer, timestamp) */
