@@ -86,6 +86,7 @@
   --muted:       var(--color-warm-gray-600);
   --line:        var(--color-tan-200);   /* hairline on paper — card borders, section rules */
   --line-soft:   var(--color-tan-100);   /* quieter hairline for nested/subtle elements */
+  --line-image:  rgba(0, 0, 0, 0.08);    /* outline around images (avatars, design screens) — translucent so it adapts to what's behind */
   --dot:         var(--color-tan-300);
   --accent:      var(--color-indigo-600);
   --accent-ink:  var(--color-indigo-800);
@@ -258,6 +259,13 @@ body {
   text-align: center;
 }
 .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Image outline drawn over the image's own edge (not around it): a translucent
+   overlay on the case-card cover; plain `outline` with a negative offset on the
+   bare <img> (.t-avatar), since pseudo-elements don't work on those. */
+a.case-card .cover::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  border: 1px solid var(--line-image); pointer-events: none;
+}
 /* when a real image is dropped in, drop the dashed placeholder border and
    clip the image to the container's rounded corners */
 .ph.has-image { border: none; overflow: hidden; }
@@ -460,8 +468,10 @@ a.case-card:hover { transform: translateY(-4px); box-shadow: 0 1px 2px rgba(var(
    exact 60/40 of the card's content width, not 60/40-plus-whatever's-left. */
 a.case-card .cover {
   flex: 0 0 calc(60% - 24px); align-self: stretch; aspect-ratio: 16 / 10; display: block;
-  border: 1px solid var(--line-soft); border-radius: 4px; overflow: hidden;
+  position: relative; border-radius: 8px; overflow: hidden;
 }
+/* No striped placeholder behind a real thumbnail (it would show through transparent PNGs). */
+a.case-card .cover.has-image { background: none; }
 a.case-card .cc-body {
   flex: 0 0 calc(40% - 24px); display: flex; flex-direction: column; justify-content: center;
 }
@@ -470,6 +480,9 @@ a.case-card .yr {
   color: var(--muted); margin: 0 0 8px;
 }
 a.case-card h3 { font-size: var(--text-2xl); line-height: var(--lh-tight); letter-spacing: var(--track-heading-sm); font-weight: 600; margin: 0 0 12px; }
+/* Title turns accent blue on hover/focus. */
+a.case-card h3 { transition: color .25s ease; }
+a.case-card:hover h3, a.case-card:focus-visible h3 { color: var(--accent); }
 a.case-card p { font-size: var(--text-md); line-height: var(--lh-body); color: var(--ink-soft); font-weight: 300; margin: 0 0 24px; }
 a.case-card .cc-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
 a.case-card .cc-tags .chip { font-size: var(--text-xs); padding: 4px 10px; }
@@ -695,7 +708,7 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
 .cs-cover { position: relative; margin: 14px auto 0; }
 .cs-cover .ph { width: 100%; height: 540px; border-radius: 8px; box-shadow: 0 1px 2px rgba(var(--shadow-ink),.05), 0 30px 60px -40px rgba(var(--shadow-ink),.4); }
 /* a real cover image keeps its own proportions, centered (no cropping) */
-.cs-cover .ph.has-image { height: auto; border: 1px solid var(--line); }
+.cs-cover .ph.has-image { height: auto; border: 1px solid var(--line); background: none; }
 .cs-cover .ph.has-image img { height: auto; object-fit: contain; }
 .cs-cover .tape { width: 150px; }
 
@@ -871,7 +884,7 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
 }
 .t-card figcaption { display: flex; align-items: center; gap: 16px; }
-.t-avatar { width: 48px; height: 48px; border-radius: 30%; object-fit: cover; flex-shrink: 0; border: 1px solid var(--line-soft); }
+.t-avatar { width: 48px; height: 48px; border-radius: 30%; object-fit: cover; flex-shrink: 0; outline: 1px solid var(--line-image); outline-offset: -1px; }
 .t-who { display: flex; flex-direction: column; gap: 4px; }
 .t-name { font-size: var(--text-md); font-weight: 600; color: var(--ink); }
 .t-name a { color: inherit; text-decoration: none; }
