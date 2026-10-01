@@ -218,7 +218,7 @@ async function renderProcess(trackEl) {
   const icons = await Promise.all(steps.map((s) => (s.icon ? loadIconSvg(s.icon) : "")));
 
   trackEl.innerHTML = steps.map((s, i) => {
-    const items = (s.items || []).map((it) => `<li>${escapeHtml(it)}</li>`).join("");
+    const items = (s.items || []).map((it) => `<li><span>${highlightMarkup(it).replace(/ <mark>/g, "&nbsp;<mark>")}</span></li>`).join("");
     return `
       <div class="step reveal">
         <span class="pin"></span>
