@@ -630,7 +630,7 @@ a.case-card .cc-tags .chip { font-size: var(--text-xs); padding: 4px 10px; }
 /* contact is the last section now (footer removed) — keep full section padding
    below the card so the page ends with breathing room where the footer was. */
 .contact-card {
-  background: var(--paper-card); border: 1px solid var(--line); border-radius: 4px;
+  background: var(--paper-card); border: 1px solid var(--line); border-radius: 6px;
   padding: 64px 60px; position: relative;
   box-shadow: 0 1px 2px rgba(var(--shadow-ink),.05), 0 26px 56px -34px rgba(var(--shadow-ink),.32);
 }
@@ -703,7 +703,7 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
 .cs-hero .lead { font-size: var(--text-lg); line-height: var(--lh-body); color: var(--ink-soft); font-weight: 300; max-width: none; margin: 0; }
 
 .cs-cover { position: relative; margin: 14px auto 0; }
-.cs-cover .ph { width: 100%; height: 540px; border-radius: 8px; box-shadow: 0 1px 2px rgba(var(--shadow-ink),.05), 0 30px 60px -40px rgba(var(--shadow-ink),.4); }
+.cs-cover .ph { width: 100%; height: 540px; border-radius: 6px; box-shadow: 0 1px 2px rgba(var(--shadow-ink),.05), 0 30px 60px -40px rgba(var(--shadow-ink),.4); }
 /* a real cover image keeps its own proportions, centered (no cropping) */
 .cs-cover .ph.has-image { height: auto; border: 1px solid var(--line); background: none; }
 .cs-cover .ph.has-image img { height: auto; object-fit: contain; }
@@ -733,15 +733,25 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
 .cs-prose blockquote,
 .cs-quote {
   position: relative;
-  background: var(--paper-card); border: 1px solid var(--line); border-left: 3px solid var(--accent);
-  border-radius: 0 6px 6px 0; padding: 22px 28px 22px 76px; box-shadow: 0 1px 2px rgba(var(--shadow-ink),.05), 0 18px 40px -30px rgba(var(--shadow-ink),.3);
+  background: var(--paper-card); border: 1px solid var(--line); border-left: 0;
+  border-radius: 6px; padding: 22px 28px 22px 80px; box-shadow: 0 1px 2px rgba(var(--shadow-ink),.05), 0 18px 40px -30px rgba(var(--shadow-ink),.3);
 }
 .cs-prose blockquote::before,
 .cs-quote::before {
   content: "\201C";
-  position: absolute; top: 4px; left: 20px;
+  position: absolute; top: 4px; left: 24px;
   font-family: var(--font); font-size: 80px; font-weight: 500; line-height: 1;
   color: var(--accent); pointer-events: none;
+}
+/* Accent bar in place of the left border: full height (over the top/bottom
+   border too), outer edge following the card's 6px corners, inner edge
+   straight. Keep the bar width >= the radius, or the browser shrinks the
+   curve and it stops matching the card (draw wider and clip-path it down). */
+.cs-prose blockquote::after,
+.cs-quote::after {
+  content: ""; position: absolute; left: 0; top: -1px; bottom: -1px; width: 6px;
+  border-radius: 6px 0 0 6px;
+  background: var(--accent); pointer-events: none;
 }
 .cs-prose blockquote p,
 .cs-quote p { font-size: var(--text-lg); line-height: 1.5; color: var(--ink); font-weight: 300; margin: 0; }
@@ -749,11 +759,11 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
 .cs-prose code { font-family: var(--mono); font-size: var(--text-sm); background: var(--paper-card2); border: 1px solid var(--line); padding: 1px 6px; border-radius: 4px; }
 .cs-prose pre { background: var(--paper-card); border: 1px solid var(--line); border-radius: 6px; padding: 20px; overflow-x: auto; margin: 0 0 18px; }
 .cs-prose pre code { background: none; border: none; padding: 0; }
-.cs-prose img { width: 100%; border-radius: 8px; border: 1px solid var(--line); margin: 32px 0 48px; box-shadow: 0 1px 2px rgba(var(--shadow-ink),.05), 0 22px 46px -32px rgba(var(--shadow-ink),.32); }
+.cs-prose img { width: 100%; border-radius: 6px; border: 1px solid var(--line); margin: 32px 0 48px; box-shadow: 0 1px 2px rgba(var(--shadow-ink),.05), 0 22px 46px -32px rgba(var(--shadow-ink),.32); }
 
 /* ![[ ]] obsidian embed placeholder */
 .md-figure {
-  width: 100%; height: 360px; border-radius: 8px; margin: 36px 0 52px;
+  width: 100%; height: 360px; border-radius: 6px; margin: 36px 0 52px;
   box-shadow: 0 1px 2px rgba(var(--shadow-ink),.05), 0 22px 46px -32px rgba(var(--shadow-ink),.32);
 }
 .md-figure span { padding: 0 16px; }
@@ -763,7 +773,7 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
   position: relative;
   width: 100%;
   margin: 32px 0 48px;
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid var(--line);
   overflow: hidden;
   user-select: none;
@@ -842,23 +852,40 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
 .cs-quote .by { font-family: var(--mono); font-size: var(--text-sm); letter-spacing: var(--track-label-sm); text-transform: uppercase; color: var(--muted); }
 
 
-/* empty-state notice */
-.cs-notice {
-  max-width: 760px; margin: 48px auto 0; background: var(--paper-card); border: 1px solid var(--line);
-  border-left: 3px solid var(--accent); border-radius: 6px; padding: 26px 30px;
-  font-size: var(--text-md); line-height: var(--lh-body); color: var(--ink-soft); font-weight: 300;
+/* next / prev nav: preview cards of the neighbouring cases. Same paper
+   surface, border, shadow and hover lift as the homepage case cards. Each card
+   is a row with a small 16:10 thumbnail on the inner side (Previous: image on
+   the right, Next: image on the left), so the two images sit at the centre. */
+/* Spans the full page container, matching the contact card below. */
+.cs-next { margin: 128px 0 0; display: flex; gap: 16px; }
+.cs-nav-card {
+  flex: 1 1 0; min-width: 0; display: flex; align-items: center; gap: 24px; padding: 24px;
+  text-decoration: none; color: var(--ink);
+  background: var(--paper-card); border: 1px solid var(--line); border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(var(--shadow-ink),.05), 0 16px 34px -26px rgba(var(--shadow-ink),.28);
+  transition: transform .25s ease, box-shadow .25s ease;
 }
-
-/* next / prev nav */
-.cs-next { max-width: 760px; margin: 64px auto 0; display: flex; gap: 16px; }
-.cs-next a { flex: 1 1 0; justify-content: center; min-width: 0; }
-.cs-next .cs-count { font-family: var(--mono); font-size: var(--text-sm); color: var(--muted); }
-.cs-next a:hover .cs-count { color: var(--color-taupe-400); }
-/* when the two columns get tight, drop the word "case" (keep them side by side) */
-@media (max-width: 560px) {
-  .cs-next { gap: 12px; }
-  .cs-next a { padding-left: 14px; padding-right: 14px; gap: 6px; }
-  .cs-next .cs-word { display: none; }
+.cs-nav-card.prev { flex-direction: row-reverse; }
+.cs-nav-card:hover { transform: translateY(-4px); box-shadow: 0 1px 2px rgba(var(--shadow-ink),.05), 0 26px 46px -28px rgba(var(--shadow-ink),.34); }
+.cs-nav-card .cover {
+  flex: none; width: 160px; aspect-ratio: 16 / 10; position: relative;
+  border-radius: 2px; overflow: hidden; font-size: 10px;
+}
+.cs-nav-card .cover.has-image { background: none; }
+/* image outline drawn over the image's edge, as on the homepage case cards */
+.cs-nav-card .cover::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  border: 1px solid var(--line-image); pointer-events: none;
+}
+.cs-nav-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.cs-nav-card.next .cs-nav-body { align-items: flex-end; text-align: right; }
+.cs-nav-label { display: inline-flex; align-items: center; gap: 8px; font-size: var(--text-sm); color: var(--muted); }
+.cs-nav-title { font-size: var(--text-xl); line-height: var(--lh-tight); font-weight: 500; }
+/* Too narrow for two cards side by side: stack them. */
+@media (max-width: 680px) {
+  .cs-next { flex-direction: column; }
+  .cs-nav-card { flex: none; }
+  .cs-nav-card .cover { width: 96px; }
 }
 
 /* loading / error */

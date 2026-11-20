@@ -110,33 +110,46 @@ def quote_markup(meta):
     return f'<div class="cs-quote"><p>{escape(meta["testimonial"])}</p>{by}</div>'
 
 
-def nav_markup(slug, slugs):
+def nav_card(direction, slug, meta):
+    """A preview card for the previous/next case: cover, then label + title."""
+    title = escape(meta.get("title") or slug)
+    if meta.get("cover"):
+        cover = (f'<div class="ph cover has-image"><img src="{escape(meta["cover"])}" alt="" '
+                 'loading="lazy" decoding="async" /></div>')
+    else:
+        cover = '<div class="ph cover"><span>cover coming soon</span></div>'
+    if direction == "prev":
+        label = '<i class="ti ti-arrow-left"></i> Previous case'
+    else:
+        label = 'Next case <i class="ti ti-arrow-right"></i>'
+    return f"""
+        <a href="{page_name(slug)}" class="cs-nav-card {direction}">
+          {cover}
+          <span class="cs-nav-body">
+            <span class="cs-nav-label">{label}</span>
+            <span class="cs-nav-title">{title}</span>
+          </span>
+        </a>"""
+
+
+def nav_markup(slug, slugs, metas):
     if slug not in slugs or len(slugs) < 2:
         return ""
     total = len(slugs)
     idx = slugs.index(slug)
     prev_idx, next_idx = (idx - 1) % total, (idx + 1) % total
+    prev_slug, next_slug = slugs[prev_idx], slugs[next_idx]
     return f"""
-      <div class="cs-next">
-        <a href="{page_name(slugs[prev_idx])}" class="btn btn-ghost prev">
-          <i class="ti ti-arrow-left"></i> <span class="cs-label">Previous<span class="cs-word"> case</span></span> <span class="cs-count">{prev_idx + 1}/{total}</span>
-        </a>
-        <a href="{page_name(slugs[next_idx])}" class="btn btn-ghost next">
-          <span class="cs-count">{next_idx + 1}/{total}</span> <span class="cs-label">Next<span class="cs-word"> case</span></span> <i class="ti ti-arrow-right"></i>
-        </a>
-      </div>"""
+      <nav class="cs-next" aria-label="More case studies">{nav_card("prev", prev_slug, metas[prev_slug])}{nav_card("next", next_slug, metas[next_slug])}
+      </nav>"""
 
 
-def content_markup(slug, slugs, meta, body):
+def content_markup(slug, slugs, metas, meta, body):
     tags = "".join(
         f'<span class="chip" style="font-size:12px;padding:5px 11px">{escape(t)}</span>'
         for t in (meta.get("tags") or [])
     )
-    if body.strip():
-        body_html = f'<div class="cs-prose">{render_body(body)}</div>'
-    else:
-        body_html = ('<div class="cs-notice">✏️ This case study is currently being written. Full write-up, '
-                     "visuals, and outcomes are coming soon — the structure and details below will be filled in.</div>")
+    body_html = f'<div class="cs-prose">{render_body(body)}</div>' if body.strip() else ""
     lead = f'<p class="lead">{escape(meta["summary"])}</p>' if meta.get("summary") else ""
 
     return f"""
@@ -157,20 +170,24 @@ def content_markup(slug, slugs, meta, body):
       <div class="cs-body">
         {body_html}
         {quote_markup(meta)}
-        {nav_markup(slug, slugs)}
       </div>
+      {nav_markup(slug, slugs, metas)}
     </div>
   """
 
 
-def build_page(template, slug, slugs):
-    meta, body = parse_frontmatter((CONTENT_DIR / f"{slug}.md").read_text(encoding="utf-8"))
+def read_study(slug):
+    return parse_frontmatter((CONTENT_DIR / f"{slug}.md").read_text(encoding="utf-8"))
+
+
+def build_page(template, slug, slugs, metas):
+    meta, body = read_study(slug)
     title = f'{meta.get("title") or "Case study"} — {SITE_NAME}'
     values = {
         "title": escape(title),
         "description": escape(meta.get("summary") or ""),
         "slug": escape(slug),
-        "content": content_markup(slug, slugs, meta, body),
+        "content": content_markup(slug, slugs, metas, meta, body),
     }
     return re.sub(r"\{\{(\w+)\}\}", lambda m: values[m.group(1)], template)
 
@@ -185,10 +202,12 @@ def main():
     if dupes:
         sys.exit(f"Two studies would share a page name: {', '.join(sorted(dupes))}")
 
+    metas = {slug: read_study(slug)[0] for slug in slugs}
+
     stale = []
     for slug in slugs:
         out = OUT_DIR / f"{page_name(slug)}.html"
-        html = build_page(template, slug, slugs)
+        html = build_page(template, slug, slugs, metas)
         if out.exists() and out.read_text(encoding="utf-8") == html:
             continue
         stale.append(out.name)
