@@ -1,7 +1,7 @@
 ---
 title: "Simplified workflows for a 20-year-old maintenance system"
 summary: "Improving usability of an asset management system serving 5,000+ gas stations."
-tags: [B2B, UX research, UI redesign]
+tags: [B2B, UX research, Redesign]
 year: 2022
 cover: images/reports-kanban-ui-cover.png
 testimonial: "We were able to reduce the number of steps necessary to complete the tasks our users perform most while also increasing the visibility of those tasks in such a way that errors and missteps were reduced."
