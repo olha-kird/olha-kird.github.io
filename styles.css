@@ -881,11 +881,19 @@ a.footer-link:hover { color: var(--accent); text-decoration: underline; }
 .cs-nav-card.next .cs-nav-body { align-items: flex-end; text-align: right; }
 .cs-nav-label { display: inline-flex; align-items: center; gap: 8px; font-size: var(--text-sm); color: var(--muted); }
 .cs-nav-title { font-size: var(--text-xl); line-height: var(--lh-tight); font-weight: 500; }
-/* Too narrow for two cards side by side: stack them. */
+/* Tablet widths: cards stay side by side but drop the thumbnail to leave
+   room for the title. */
+@media (max-width: 1024px) {
+  .cs-nav-card .cover { display: none; }
+  .cs-nav-title { font-size: var(--text-lg); }
+}
+/* Too narrow for two cards side by side: stack them, Next above Previous,
+   and bring the thumbnail back at a smaller size. */
 @media (max-width: 680px) {
-  .cs-next { flex-direction: column; }
+  .cs-next { flex-direction: column-reverse; }
   .cs-nav-card { flex: none; }
-  .cs-nav-card .cover { width: 96px; }
+  .cs-nav-card .cover { display: block; width: 96px; }
+  .cs-nav-title { font-size: var(--text-md); }
 }
 
 /* loading / error */
